@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 .page-header {
   border-bottom: solid 1px;
   display: grid;
@@ -25,6 +29,8 @@ code {
   text-align: center;
   font-size: 250%;
   font-weight: bold;
+  margin-right: 50%;
+  margin-left: 5%;
 }
 
 .nav-menu {
@@ -38,10 +44,12 @@ code {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  border: red 1px solid;
 }
 
 .nav-menu div:hover {
   border: green 1px solid;
 }
 
+.home {
+  font-size: 500%;
+}
