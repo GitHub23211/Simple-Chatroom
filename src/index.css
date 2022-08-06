@@ -16,40 +16,13 @@ a:link {
   text-decoration: none;
 }
 
-.page-header {
-  border-bottom: solid 1px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 0.3% 0% 0.3% 0%;
-}
-
-.page-header #logo {
-  grid-column: 1;
-  display: inline-block;
-  text-align: center;
-  font-size: 250%;
-  font-weight: bold;
-  margin-right: 50%;
-  margin-left: 5%;
-}
-
-.nav-menu {
-  grid-column: 2;
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.nav-menu div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
 .nav-menu div:hover {
   border: green 1px solid;
 }
 
-.home {
-  font-size: 500%;
+#page-header {
+  border-bottom: solid 1px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 0.3% 0% 0.3% 0%;
 }

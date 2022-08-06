@@ -3,8 +3,17 @@ export {View}
 const View = {
     Home: () => {
         return(
-            <div class="home">
+            <div className="home">
                 Hi
+            </div>
+        )
+    },
+
+    Messages: () => {
+        return(
+            <div className="convo">
+                hi like
+                omg
             </div>
         )
     }
