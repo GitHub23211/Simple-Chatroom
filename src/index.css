@@ -15,7 +15,7 @@ code {
 .page-header {
   border-bottom: solid 1px;
   display: grid;
-  grid-template-columns: 1fr 2fr 5fr;
+  grid-template-columns: 1fr 2fr;
   padding: 0.3% 0% 0.3% 0%;
 }
 
@@ -25,29 +25,23 @@ code {
   text-align: center;
   font-size: 250%;
   font-weight: bold;
-  flex-grow: 1;
 }
 
 .nav-menu {
   grid-column: 2;
   display: flex;
   flex-wrap: nowrap;
-  flex-grow: 8;
+}
+
+.nav-menu div {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-grow: 1;
+  border: red 1px solid;
 }
 
-.nav-menu #home {
-  text-align: center;
-  flex-grow: 1;
-}
-
-.nav-menu #convo {
-  text-align: center;
-  flex-grow: 1;
-}
-
-.nav-menu #user {
-  text-align: center;
-  flex-grow: 1;
+.nav-menu div:hover {
+  border: green 1px solid;
 }
 
