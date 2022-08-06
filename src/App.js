@@ -1,4 +1,4 @@
-import {View} from './view.js'
+import {View} from './components/view.js'
 import {useState} from 'react'
 
 const Link = ({func, label}) => {
