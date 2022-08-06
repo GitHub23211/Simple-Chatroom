@@ -1,6 +1,6 @@
 function Messages () {
     return(
-        <div className="convo">
+        <div>
             hi like
             omg
         </div>

@@ -1,11 +1,13 @@
 import {Messages, Link, Home} from './components'
-import useState from 'react'
+import {useState} from 'react'
 
 function App() {
+  const [view, setView] = useState(<Home/>)
+  
   return (
     <>
-      <Home/>
-      <Link func={() => console.log("clicked")} label="Messages"/>
+      {view}
+      <Link func={() => setView(<Messages/>)} label="Messages"/>
     </>
   );
 }
