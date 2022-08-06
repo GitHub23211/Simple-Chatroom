@@ -1,13 +1,6 @@
-import {View} from './components/view.js'
-import {useState} from 'react'
-
-const Link = ({func, label}) => {
-   return (
-    <div onClick={func}>
-      {label}
-    </div>
-   )
-}
+import View from './components/View.js'
+import Link from './components/Link.js'
+import useState from 'react'
 
 function App() {
   return (

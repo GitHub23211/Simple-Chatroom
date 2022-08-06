@@ -1,5 +1,3 @@
-export {View}
-
 const View = {
     Home: () => {
         return(
@@ -18,3 +16,5 @@ const View = {
         )
     }
 }
+
+export default View
