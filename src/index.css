@@ -19,10 +19,3 @@ a:link {
 .nav-menu div:hover {
   border: green 1px solid;
 }
-
-#page-header {
-  border-bottom: solid 1px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 0.3% 0% 0.3% 0%;
-}

@@ -1,13 +1,15 @@
-function Navigation() {
+import Link from './Link'
+
+function Navigation({view}) {
     return (
-        <>
+        <header style={style.header}>
             <div style={style.logo}>CHAT</div>
                 <div className='nav-menu' style={style.menu}>
-                <div style={style.div}>Home</div>
-                <div style={style.div}>Conversations</div>
-                <div style={style.div}>Profile</div>
+                <Link func={view} label="Home" style={style.div}/>
+                <Link func={view} label="Conversations" style={style.div}/>
+                <Link func={view} label="Profile" style={style.div}/>
             </div>
-        </>
+        </header>
     )
 }
 
@@ -20,6 +22,13 @@ const style = {
         fontWeight: 'bold',
         marginRight: '50%',
         marginLeft: '5%',
+    },
+
+    header: {
+        borderBottom: 'solid 1px',
+        display: 'grid',
+        gridTemplateColumns: '1fr 2fr',
+        padding: '0.3% 0% 0.3% 0%'
     },
 
     menu: {

@@ -1,6 +1,6 @@
-function Link ({func, label}) {
+function Link ({func, label, style}) {
     return (
-     <div onClick={func}>
+     <div style={style} onClick={func}>
        {label}
      </div>
     )

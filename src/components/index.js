@@ -1,5 +1,5 @@
 import Messages from './Messages'
-import Link from './Link'
 import Home from './Home'
+import Navigation from './Navigation'
 
-export {Messages, Link, Home}
+export {Messages, Navigation, Home}
