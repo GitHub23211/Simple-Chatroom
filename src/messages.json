@@ -1,0 +1,18 @@
+{
+    "messages": [
+        {
+            "id": 0,
+            "contents": "Hello world"
+        },
+
+        {
+            "id": 1,
+            "contents": "How ya doin"
+        },
+
+        {
+            "id": 2,
+            "contents": "I'm gooooood"
+        }
+    ]
+}
