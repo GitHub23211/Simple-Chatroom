@@ -1,6 +1,6 @@
-import Message from './Message'
 import Home from './Home'
 import Navigation from './Navigation'
 import Form from './Form'
+import Conversation from './Conversation'
 
-export {Message, Navigation, Home, Form}
+export {Navigation, Home, Form, Conversation}
