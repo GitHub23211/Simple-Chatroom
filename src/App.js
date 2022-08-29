@@ -1,15 +1,17 @@
-import {Navigation, Home, Form, Conversation} from './components'
+import {Navigation, Home, Form, Conversation, Registration, Login} from './components'
 import {useState, useEffect} from 'react'
-import axios from './components/Axios.js'
+import auth from './To be categorised/auth.js'
 
 function App() {
   const myMessages = require('./messages.json').messages
-  const hook = axios.verifyUser(userInfo => console.log(userInfo))
+  const user = {}
 
-  useEffect(hook, [])
+
+  // useEffect(hook, [])
 
   const [view, setView] = useState(<Home/>)
   const [myMsgs, setMyMsgs] = useState(myMessages)
+  const [currentUser, changeUser] = useState(user)
   
   
 
@@ -17,7 +19,9 @@ function App() {
     <>
       <Navigation view={()=> console.log("click")}/>
       <Conversation convo={myMsgs}/>
-      <Form onSubmit={() => console.log("Submit")} sendMsg={() => console.log("Sent message")}/>
+      <Form onSubmit={(event) => {event.preventDefault(); console.log("Submit")}} sendMsg={() => console.log("Sent message")}/>
+      <Registration registerUser={auth.registerUser}/>
+      <Login loginUser={auth.loginUser}/>
     </>
   );
 }
