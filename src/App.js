@@ -1,12 +1,17 @@
 import {Navigation, Home, Form, Conversation} from './components'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import axios from './components/Axios.js'
 
 function App() {
   const myMessages = require('./messages.json').messages
+  const hook = axios.verifyUser(userInfo => console.log(userInfo))
 
+  useEffect(hook, [])
 
   const [view, setView] = useState(<Home/>)
   const [myMsgs, setMyMsgs] = useState(myMessages)
+  
+  
 
   return (
     <>
