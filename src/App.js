@@ -9,7 +9,7 @@ function App() {
   const [currentMsg, setCurrentMsg] = useState("")
   const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
   const [myConvos, setMyConvos] = useState([])
-  const [currentConvo, setCurrentConvo] = useState("")
+  let currentConvo = ""
   
   const registerNewUser = (event) => {
     auth.registerUser(event)
@@ -34,7 +34,7 @@ function App() {
 
   const getConversations = () => {
     conversation.getConversations(currentUser)
-        .then(response => {console.log(response); setMyConvos(response); setCurrentConvo(response[0].id)})
+        .then(response => {console.log(response); setMyConvos(response); currentConvo = response[0].id})
   }
 
   const sendMessage = (event) => {
@@ -65,7 +65,7 @@ function App() {
   }
 
   const selectConvo = (event) => {
-    setCurrentConvo(event.target.attributes[0].value)
+    currentConvo = event.target.attributes[0].value
     console.log(currentConvo)
     getMessages()
   }
@@ -74,7 +74,6 @@ function App() {
     conversation.getMessages(currentUser, 5, currentConvo)
                 .then(response => {setMyMsgs(response.messages.reverse()); console.log(myMsgs)})
   }
-
 
   return (
     <>
