@@ -29,7 +29,7 @@ function App() {
       "title": event.target[0].value
     }
     conversation.createConversation(currentUser, payload)
-                .then(response => {console.log(response); getConversations()})
+                .then(response => {setNewConvoName("")})
   }
 
   const getConversations = () => {
@@ -43,10 +43,8 @@ function App() {
       "text": event.target[0].value
     }
     conversation.sendMessage(currentUser, message, currentConvo)
-    .then(response => {setCurrentMsg(""); getMessages()})
+    .then(response => {setCurrentMsg("")})
   }
-
-  useEffect(getConversations, []) 
 
   const onChangeConvoTitle = (event) => {
     setNewConvoName(event.target.value)
@@ -73,7 +71,8 @@ function App() {
                 .then(response => {setMyMsgs(response.messages.reverse()); console.log(myMsgs)})
   }
 
-  useEffect(getMessages, [currentConvo])
+  useEffect(getMessages, [currentConvo, currentMsg])
+  useEffect(getConversations, [newConvoName])
 
   return (
     <>
