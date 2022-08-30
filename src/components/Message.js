@@ -1,4 +1,4 @@
-function Message ({msg}) {
+function Message ({msg, deleteMsg}) {
     return(
         <li style={style.message}>
             {msg}

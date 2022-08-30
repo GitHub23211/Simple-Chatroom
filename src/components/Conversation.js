@@ -1,24 +1,18 @@
-import Message from './Message'
-
-function Conversation({createConvo, myConvos, label, onChange}) {
-    
+function Conversation ({convo, deleteConvo}) {
     return(
-        <>
-            <ul>
-                {myConvos.map(convo => <Message key={convo.id} msg={convo.id}/>)}
-            </ul>
-            <form onSubmit={createConvo}>
-                <input value={label} onChange={onChange}></input>
-                <button>
-                    Create Conversation
-                </button>
-            </form>
-        </>
+        <li style={style.message}>
+            {convo}
+            <button onClick={deleteConvo}>
+                Delete Conversation
+            </button>
+        </li>
     )
 }
 
 const style = {
-    
+    message: {
+        listStyle: "none"
+    }
 }
 
 

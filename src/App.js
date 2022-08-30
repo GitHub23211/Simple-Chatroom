@@ -1,4 +1,4 @@
-import {Navigation, Home, Form, Conversation, Registration, Login} from './components'
+import {Navigation, Home, Form, Conversation, Registration, Login, ConversationList} from './components'
 import {useState, useEffect} from 'react'
 import {auth, conversation} from './To be categorised'
 
@@ -52,7 +52,7 @@ function App() {
   return (
     <>
       <Navigation view={()=> console.log("click")}/>
-      <Conversation createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle}/>
+      <ConversationList createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle}/>
       <Form sendMsg={sendMessage}/>
       <Registration registerUser={registerNewUser}/>
     </>
