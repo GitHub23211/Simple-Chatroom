@@ -1,14 +1,12 @@
 import Message from './Message'
 
-function Conversation ({convo, getConvo}) {
+function Conversation({convo}) {
+
     return(
-        <li data-id={convo.id} onClick={getConvo}> {convo.title}</li>
+        <div>
+            {convo.map(msg => <Message key={msg.id} msg={msg.text}/>)}
+        </div>  
     )
 }
-
-const style = {
-
-}
-
 
 export default Conversation

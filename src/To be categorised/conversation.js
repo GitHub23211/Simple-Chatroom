@@ -31,4 +31,18 @@ const sendMessage = (user, message, id) => {
     return axios.post(url+id, message, headers)
                 .then(response => response.data)
 }
-export default { getConversations, createConversation, sendMessage }
+
+const getMessages = (user, num, id) => {
+  const headers = {
+    headers: {
+      "Authorization": 'basic ' + user.token
+    },
+    params: {
+      "N": num
+    }
+  }
+  return axios.get(url+id, headers)
+              .then(response => response.data)
+}
+
+export default { getConversations, createConversation, sendMessage, getMessages }
