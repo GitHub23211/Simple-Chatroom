@@ -1,4 +1,4 @@
-function Form ({sendMsg}) {
+function SendMsg ({sendMsg}) {
     return (
         <form onSubmit={sendMsg}>
             <input onChange={console.log('typing')}></input>
@@ -9,4 +9,4 @@ function Form ({sendMsg}) {
     )
 }
 
-export default Form
+export default SendMsg

@@ -1,18 +1,13 @@
-function Conversation ({convo, deleteConvo}) {
+import Message from './Message'
+
+function Conversation ({convo, getConvo}) {
     return(
-        <li style={style.message}>
-            {convo}
-            <button onClick={deleteConvo}>
-                Delete Conversation
-            </button>
-        </li>
+        <li data-id={convo.id} onClick={getConvo}> {convo.title}</li>
     )
 }
 
 const style = {
-    message: {
-        listStyle: "none"
-    }
+
 }
 
 

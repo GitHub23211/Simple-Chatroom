@@ -1,4 +1,4 @@
-import {Navigation, Home, Form, Conversation, Registration, Login, ConversationList} from './components'
+import {Navigation, Home, SendMsg, Registration, ConversationList} from './components'
 import {useState, useEffect} from 'react'
 import {auth, conversation} from './To be categorised'
 
@@ -8,7 +8,7 @@ function App() {
   const [myMsgs, setMyMsgs] = useState({})
   const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
   const [myConvos, setMyConvos] = useState([])
-  const [currentConvo, setCurrentConvo] = useState({})
+  const [currentConvo, setCurrentConvo] = useState("")
   
   const registerNewUser = (event) => {
     auth.registerUser(event)
@@ -38,7 +38,10 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault()
-    conversation.sendMessage(currentUser, event.target[0].value)
+    const message = {
+      "text": event.target[0].value
+    }
+    conversation.sendMessage(currentUser, message, currentConvo)
     .then(response => console.log(response))
   }
 
@@ -48,12 +51,17 @@ function App() {
     setNewConvoName(event.target.value)
   }
 
+  const selectConvo = (event) => {
+    setCurrentConvo(event.target.attributes[0].value)
+    console.log(currentConvo)
+  }
+
 
   return (
     <>
       <Navigation view={()=> console.log("click")}/>
-      <ConversationList createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle}/>
-      <Form sendMsg={sendMessage}/>
+      <ConversationList createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle} getConvo={selectConvo}/>
+      <SendMsg sendMsg={sendMessage}/>
       <Registration registerUser={registerNewUser}/>
     </>
   );

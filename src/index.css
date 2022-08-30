@@ -19,3 +19,7 @@ a:link {
 .nav-menu div:hover {
   border: green 1px solid;
 }
+
+.convo-list li:hover {
+  border: green 1px solid;
+}
