@@ -1,6 +1,6 @@
 import Message from './Message'
 
-function Conversation({createConvo, myConvos}) {
+function Conversation({createConvo, myConvos, label, onChange}) {
     
     return(
         <>
@@ -8,7 +8,7 @@ function Conversation({createConvo, myConvos}) {
                 {myConvos.map(convo => <Message key={convo.id} msg={convo.id}/>)}
             </ul>
             <form onSubmit={createConvo}>
-                <input onChange={console.log('typing')}></input>
+                <input value={label} onChange={onChange}></input>
                 <button>
                     Create Conversation
                 </button>
