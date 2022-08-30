@@ -30,8 +30,8 @@ function App() {
   }
 
   const getConversations = () => {
-    auth.getConversations(currentUser)
-        .then(response => console.log(response))
+    conversation.getConversations(currentUser)
+        .then(response => {console.log("list of convos", response); setMyConvos(response)})
   }
 
   const sendMessage = (event) => {
@@ -39,6 +39,8 @@ function App() {
     conversation.sendMessage(currentUser, event.target[0].value)
     .then(response => console.log(response))
   }
+
+  useEffect(getConversations, []) 
 
 
   return (

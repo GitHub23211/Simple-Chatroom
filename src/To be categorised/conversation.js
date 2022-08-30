@@ -9,7 +9,7 @@ const getConversations = (user) => {
         }
     }
     return axios.get(url, headers)
-                .then(response => response.data)
+                .then(response => response.data.conversations)
 }
 
 const createConversation = (user, title) => {

@@ -5,7 +5,7 @@ function Conversation({createConvo, myConvos}) {
     return(
         <>
             <ul>
-                {myConvos}
+                {myConvos.map(convo => <Message key={convo.id} msg={convo.id}/>)}
             </ul>
             <form onSubmit={createConvo}>
                 <input onChange={console.log('typing')}></input>
