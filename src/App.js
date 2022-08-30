@@ -9,7 +9,7 @@ function App() {
   const [currentMsg, setCurrentMsg] = useState("")
   const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
   const [myConvos, setMyConvos] = useState([])
-  const [currentConvo, setCurrentConvo] = useState({})
+  const [currentConvo, setCurrentConvo] = useState("")
   
   const registerNewUser = (event) => {
     auth.registerUser(event)
@@ -34,7 +34,7 @@ function App() {
 
   const getConversations = () => {
     conversation.getConversations(currentUser)
-        .then(response => {console.log(response); setMyConvos(response)})
+        .then(response => {console.log(response); setMyConvos(response); setCurrentConvo(response[0].id)})
   }
 
   const sendMessage = (event) => {
@@ -56,15 +56,23 @@ function App() {
     setCurrentMsg(event.target.value)
   }
 
+  const onChangeRegisterFormName = (event) => {
+    console.log(event.target.value)
+  }
+
+  const onChangeRegisterFormPassword = (event) => {
+    console.log(event.target.value)
+  }
+
   const selectConvo = (event) => {
     setCurrentConvo(event.target.attributes[0].value)
-    getMessages()
     console.log(currentConvo)
+    getMessages()
   }
 
   const getMessages = () => {
-    conversation.getMessages(currentUser, 10, currentConvo)
-                .then(response => {setMyMsgs(response.messages); console.log(myMsgs)})
+    conversation.getMessages(currentUser, 5, currentConvo)
+                .then(response => {setMyMsgs(response.messages.reverse()); console.log(myMsgs)})
   }
 
 
@@ -73,7 +81,7 @@ function App() {
       <Navigation view={()=> console.log("click")}/>
       <ConversationList createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle} getConvo={selectConvo}/>
       <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg}/>
-      {/* <Registration registerUser={registerNewUser}/> */}
+      <Registration registerUser={registerNewUser} onChange={[onChangeRegisterFormName, onChangeRegisterFormPassword]}/>
       <Conversation convo={myMsgs}/>
     </>
   );

@@ -38,7 +38,7 @@ const getMessages = (user, num, id) => {
       "Authorization": 'basic ' + user.token
     },
     params: {
-      "N": num
+      "num": num
     }
   }
   return axios.get(url+id, headers)
