@@ -1,10 +1,19 @@
 import Message from './Message'
 
-function Conversation({convo}) {
+function Conversation({createConvo, myConvos}) {
+    
     return(
-        <ul>
-            {convo.map(msg => <Message key={msg.id} msg={msg.contents} />)}
-        </ul>
+        <>
+            <ul>
+                {myConvos}
+            </ul>
+            <form onSubmit={createConvo}>
+                <input onChange={console.log('typing')}></input>
+                <button>
+                    Create Conversation
+                </button>
+            </form>
+        </>
     )
 }
 

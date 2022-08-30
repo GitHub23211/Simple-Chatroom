@@ -2,25 +2,20 @@ import axios from 'axios'
 
 const url = 'http://localhost:8102/auth/'
 
-const getUser = (token) => {
-  const request = axios.get(url, token)
-  return request.then(response => response.data)
-}
-
-const loginUser = (event) => {
-  event.preventDefault()
-  const user = {
-    "username": event.target[0].value,
-    "password": event.target[1].value
+const getUser = (user) => {
+  const headers = {
+    headers: {
+      "Authorization": 'basic ' + user.token
+    }
   }
-  console.log(user)
+  return axios.get(url, headers)
+              .then(response => response.data)
 }
 
 const registerUser = (event) => {
   const newUser = createNewUser(event)
-  console.log(newUser)
   return axios.post(url+'register', newUser)
-              .then(response => {console.log(response.data); return response.data})
+              .then(response => response.data)
 }
 
 const createNewUser = (event) => {
@@ -28,4 +23,4 @@ const createNewUser = (event) => {
   return {"username": event.target[0].value}
 }
 
-export default {registerUser, loginUser}
+export default {registerUser, getUser}

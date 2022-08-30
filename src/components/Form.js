@@ -1,6 +1,6 @@
-function Form ({onSubmit, sendMsg}) {
+function Form ({sendMsg}) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={sendMsg}>
             <input onChange={console.log('typing')}></input>
             <button>
                 Send

@@ -1,27 +1,52 @@
 import {Navigation, Home, Form, Conversation, Registration, Login} from './components'
 import {useState, useEffect} from 'react'
-import auth from './To be categorised/auth.js'
+import {auth, conversation} from './To be categorised'
 
 function App() {
-  const myMessages = require('./messages.json').messages
-  const user = {}
-
-
-  // useEffect(hook, [])
-
   const [view, setView] = useState(<Home/>)
-  const [myMsgs, setMyMsgs] = useState(myMessages)
-  const [currentUser, changeUser] = useState(user)
+  const [myMsgs, setMyMsgs] = useState({})
+  const [currentUser, changeUser] = useState({})
+  const [myConvos, setMyConvos] = useState([])
   
-  
+  const registerNewUser = (event) => {
+    auth.registerUser(event)
+    .then(response => {
+      if(response.token) {
+        changeUser(response)
+        console.log("registration sucess", currentUser)
+      }
+      console.log(currentUser)
+      console.log(response)
+    })
+  }
+
+  const createConversation = (event) => {
+    event.preventDefault()
+    const payload = {
+      "title": event.target[0].value
+    }
+    conversation.createConversation(currentUser, payload)
+                .then(response => console.log(response))
+  }
+
+  const getConversations = () => {
+    auth.getConversations(currentUser)
+        .then(response => console.log(response))
+  }
+
+  const sendMessage = (event) => {
+    event.preventDefault()
+    conversation.sendMessage(currentUser, event.target[0].value)
+    .then(response => console.log(response))
+  }
+
 
   return (
     <>
       <Navigation view={()=> console.log("click")}/>
-      <Conversation convo={myMsgs}/>
-      <Form onSubmit={(event) => {event.preventDefault(); console.log("Submit")}} sendMsg={() => console.log("Sent message")}/>
-      <Registration registerUser={auth.registerUser}/>
-      <Login loginUser={auth.loginUser}/>
+      <Conversation createConvo={createConversation} myConvos={myConvos}/>
+      <Form sendMsg={sendMessage}/>
+      <Registration registerUser={registerNewUser}/>
     </>
   );
 }
