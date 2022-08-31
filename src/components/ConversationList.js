@@ -32,7 +32,7 @@ function ConversationList({currentUser}) {
     return(
         <div className="convo-list">
             <ul>
-                {myConvos.map(convo => <li key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
+                {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
             </ul>
             <form onSubmit={createConversation}>
                 <input value={newConvoName} onChange={onChangeConvoTitle}></input>
@@ -45,7 +45,9 @@ function ConversationList({currentUser}) {
 }
 
 const style = {
-    
+    convoName: {
+        listStyle: 'none'
+    }
 }
 
 

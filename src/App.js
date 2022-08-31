@@ -1,4 +1,4 @@
-import {Registration, Conversation, ConversationList} from './components'
+import {Registration, Conversation, ConversationList, Home} from './components'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import {auth} from './To be categorised'
@@ -48,7 +48,8 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<TestPage />}/>
+          <Route path="/" element={<Home />}/>
+          <Route path="/registration" element={<TestPage />}/>
           <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
         </Routes>
@@ -84,8 +85,7 @@ const style = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 1,
-        border: 'green 1px solid'
+        flexGrow: 1
     }
 }
 
