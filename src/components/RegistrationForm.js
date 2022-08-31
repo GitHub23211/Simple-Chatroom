@@ -1,4 +1,4 @@
-function Registration ({registerUser, onChange}) {
+function RegistrationForm ({registerUser, onChange}) {
     return (
         <form onSubmit={registerUser}>
             <input onChange={onChange[0]}></input>
@@ -10,4 +10,4 @@ function Registration ({registerUser, onChange}) {
     )
 }
 
-export default Registration
+export default RegistrationForm

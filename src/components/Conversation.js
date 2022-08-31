@@ -12,11 +12,12 @@ function Conversation({currentUser}) {
 
     const getMessages = () => {
         convoService.getMessages(currentUser, 5, currentConvo)
-                  .then(response => {setMyMsgs(response.messages.reverse()); console.log(myMsgs)})
+                  .then(response => setMyMsgs(response.messages.reverse()))
     }
 
     const deleteMessage = (event) => {
-    convoService.deleteMessage(currentUser, currentConvo, event.target.attributes[0].value)
+        console.log( event.target.attributes)
+        convoService.deleteMessage(currentUser, currentConvo, event.target.attributes[0].value)
                 .then(response => getMessages())
     }
 
@@ -34,22 +35,17 @@ function Conversation({currentUser}) {
       setCurrentMsg(event.target.value)
     }
 
-    useEffect(getMessages, [])
+    useEffect(getMessages, [currentConvo])
 
-    console.log("component reloaded")
+    console.log("Conversation reloaded")
 
     return(
         <div className="row">
-            <div className="two columns">
                 <ConversationList currentUser={currentUser}/>
-            </div>
-            <div className="ten columns">
+            <div className="eight columns">
                 {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
-                <div>
-                    <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
-                </div>
+                <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
             </div>
-     
         </div>
     )
 }

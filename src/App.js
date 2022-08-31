@@ -1,37 +1,7 @@
-import {Registration, Conversation, ConversationList, Home} from './components'
+import {Conversation, ConversationList, Home} from './components'
+import { Registration } from './pages'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
-import {auth} from './To be categorised'
-
-function TestPage() {
-  const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
-  
-  const registerNewUser = (event) => {
-    auth.registerUser(event)
-    .then(response => {
-      if(response.token) {
-        changeUser(response)
-        console.log("registration succcess", currentUser)
-      }
-      console.log(currentUser)
-      console.log(response)
-    })
-  }
-
-  const onChangeRegisterFormName = (event) => {
-    console.log(event.target.value)
-  }
-
-  const onChangeRegisterFormPassword = (event) => {
-    console.log(event.target.value)
-  }
-
-  return (
-    <>
-      <Registration registerUser={registerNewUser} onChange={[onChangeRegisterFormName, onChangeRegisterFormPassword]}/>
-    </>
-  )
-}
 
 function App() {
   const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
@@ -49,7 +19,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/registration" element={<TestPage />}/>
+          <Route path="/registration" element={<Registration />}/>
           <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
         </Routes>

@@ -28,27 +28,32 @@ function ConversationList({currentUser}) {
 
     useEffect(getConversations, [])
 
-    console.log("component reloaded")
+    console.log("ConversationList reloaded")
 
     return(
-        <div className="convo-list" style={style.convoList}>
-            <h6><strong>Your Conversations</strong></h6>
-            <ul>
-                {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
-            </ul>
-            <form onSubmit={createConversation}>
-                <input className="u-full-width" placeholder="Enter Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
-                <button>
-                    Create Conversation
-                </button>
-            </form>
-        </div>
+        <div>
+            <div className="two columns">
+                <div className="convo-list" style={style.convoList}>
+                    <h6><strong>Your Conversations</strong></h6>
+                    <ul>
+                        {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
+                    </ul>
+                    <form onSubmit={createConversation}>
+                        <input type="text" className="u-full-width" placeholder="Enter Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
+                        <button class="u-full-width">
+                            Create Conversation
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div className="ten columns"></div>
+    </div>
     )
 }
 
 const style = {
     convoList: {
-        margin: "5% 0% 0% 5%"
+        margin: "3% 0% 0% 3%"
     },
 
     convoName: {
