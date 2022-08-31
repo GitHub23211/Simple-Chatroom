@@ -1,8 +1,13 @@
 function Message ({msg, onClick}) {
     return(
-        <li style={style.message} data-id={msg.id} onClick={onClick} >
-            {msg.text}
-        </li>
+        <>
+            <li style={style.message}>
+                {msg.text}
+                <button data-id={msg.id} onClick={onClick}>
+                delete
+                </button>
+            </li>
+        </>
     )
 }
 

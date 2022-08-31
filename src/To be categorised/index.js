@@ -1,4 +1,4 @@
 import auth from './auth'
-import conversation from './conversation'
+import convoService from './convoService'
 
-export {auth, conversation}
+export {auth, convoService}
