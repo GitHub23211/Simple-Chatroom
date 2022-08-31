@@ -11,7 +11,7 @@ function Conversation({currentUser}) {
 
 
     const getMessages = () => {
-        convoService.getMessages(currentUser, 5, currentConvo)
+        convoService.getMessages(currentUser, 20, currentConvo)
                   .then(response => setMyMsgs(response.messages.reverse()))
     }
 
@@ -40,14 +40,64 @@ function Conversation({currentUser}) {
     console.log("Conversation reloaded")
 
     return(
-        <div className="row">
-                <ConversationList currentUser={currentUser}/>
-            <div className="eight columns">
-                {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
-                <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
+        <div>
+            <div style={style.layout}>
+
+                <div className="row">
+                    <div style={style.list}>
+                            <ConversationList currentUser={currentUser}/>
+                    </div>
+                </div>
+
+                <div style={style.convo}>
+                    <div style={style.messages} >
+                        {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
+                    </div>
+
+                    <div style={style.input}>
+                        <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
+                    </div>
+                </div>
+
+                
             </div>
         </div>
     )
+}
+
+const style = {
+    layout: {
+        display: "flex",
+        flexFlow: "row wrap-reverse"
+    },
+
+    convo: {
+        display: "grid",
+        gridTemplateColumns: "5fr",
+        flexGrow: 1
+    },
+
+    messages: {
+        gridColumn: 1,
+        gridRow: 1,
+        height: "70vh",
+        marginBottom: "2rem",
+        marginTop: "1rem",
+        marginLeft: "3%",
+        overflow: "auto"
+    },
+
+    input: {
+        gridColumn: 1,
+        gridRow: 2,
+        width: "65.333333%",
+        marginLeft: "3%"
+    },
+
+    list: {
+        flexGrow: 1,
+        width: "100%"
+    }
 }
 
 export default Conversation

@@ -1,3 +1,3 @@
-import Registration from './Registration'
+import Landing from './Landing'
 
-export {Registration}
+export {Landing}

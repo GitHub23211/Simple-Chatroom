@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {auth} from '../To be categorised'
 import {RegistrationForm} from '../components'
 
-function Registration() {
+function Landing() {
     const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
   
     const registerNewUser = (event) => {
@@ -27,9 +27,26 @@ function Registration() {
   
     return (
       <div className="container">
-        <RegistrationForm registerUser={registerNewUser} onChange={[onChangeRegisterFormName, onChangeRegisterFormPassword]}/>
+        <div className="row"  style={style.div}>
+            <div className="offset-by-four columns">
+              <h2>Register now</h2>
+              <button type="button" class="button button-primary">Login</button>
+              <button type="button" class="button button-primary">Register</button>
+            </div>
+          </div>
+
+          <div className="offset-by-three columns">
+            <RegistrationForm registerUser={registerNewUser} onChange={[onChangeRegisterFormName, onChangeRegisterFormPassword]}/>
+          </div>
       </div>
     )
 }
 
-export default Registration
+const style = {
+  div: {
+    paddingBottom: "10%"
+  }
+}
+
+
+export default Landing

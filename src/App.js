@@ -1,5 +1,5 @@
 import {Conversation, ConversationList, Home} from './components'
-import { Registration } from './pages'
+import { Landing } from './pages'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
@@ -19,7 +19,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/registration" element={<Registration />}/>
+          <Route path="/registration" element={<Landing />}/>
           <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
         </Routes>

@@ -10,7 +10,9 @@ function Message ({msg, onClick}) {
 
 const style = {
     message: {
-        listStyle: "none"
+        listStyle: "none",
+        maxWidth: "75ch",
+        wordBreak: "break-all"
     }
 }
 

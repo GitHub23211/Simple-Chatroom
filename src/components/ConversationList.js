@@ -31,34 +31,38 @@ function ConversationList({currentUser}) {
     console.log("ConversationList reloaded")
 
     return(
-        <div>
-            <div className="two columns">
-                <div className="convo-list" style={style.convoList}>
-                    <h6><strong>Your Conversations</strong></h6>
-                    <ul>
-                        {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
-                    </ul>
-                    <form onSubmit={createConversation}>
-                        <input type="text" className="u-full-width" placeholder="Enter Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
-                        <button class="u-full-width">
-                            Create Conversation
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div className="ten columns"></div>
-    </div>
+        <div className="convo-list" style={style.convoList}>
+            <form onSubmit={createConversation}>
+                <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
+                <button class="u-full-width">
+                    Create
+                </button>
+            </form>
+            <h6 style={style.title}><strong>Your Conversations</strong></h6>
+            <ul>
+                {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
+            </ul>
+        </div>
     )
 }
 
 const style = {
     convoList: {
-        margin: "3% 0% 0% 3%"
+        margin: "3% 0% 0% 3%",
+        paddingRight: "3%",
+        height: "80vh",
+        overflow: "scroll",
+        overflowX: "hidden"
     },
 
     convoName: {
         listStyle: 'none'
+    },
+    
+    title: {
+        textAlign: "center"
     }
+
 }
 
 
