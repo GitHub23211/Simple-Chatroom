@@ -1,6 +1,6 @@
 import Message from './Message'
 
-function Conversation({convo}) {
+function Conversation({convo, msgOnClick}) {
     // let msgs = [{
     //     id: "N/A",
     //     text: "No messages with this person yet!"
@@ -11,7 +11,7 @@ function Conversation({convo}) {
 
     return(
         <div>
-            {convo.map(msg => <Message key={msg.id} msg={msg.text}/>)}
+            {convo.map(msg => <Message key={msg.id} msg={msg} onClick={msgOnClick}/>)}
         </div>  
     )
 }

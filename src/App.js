@@ -71,6 +71,16 @@ function App() {
                 .then(response => {setMyMsgs(response.messages.reverse()); console.log(myMsgs)})
   }
 
+  const getMessage = (event) => {
+    conversation.getMessage(currentUser, currentConvo, event.target.attributes[0].value)
+                .then(response => console.log(response))
+  }
+
+  const deleteMessage = (event) => {
+    conversation.deleteMessage(currentUser, currentConvo, event.target.attributes[0].value)
+                .then(response => getMessages())
+  }
+
   useEffect(getMessages, [currentConvo, currentMsg])
   useEffect(getConversations, [newConvoName])
 
@@ -80,7 +90,7 @@ function App() {
       <ConversationList createConvo={createConversation} myConvos={myConvos} label={newConvoName} onChange={onChangeConvoTitle} getConvo={selectConvo}/>
       <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg}/>
       <Registration registerUser={registerNewUser} onChange={[onChangeRegisterFormName, onChangeRegisterFormPassword]}/>
-      <Conversation convo={myMsgs}/>
+      <Conversation convo={myMsgs} msgOnClick={deleteMessage}/>
     </>
   );
 }

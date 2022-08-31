@@ -1,7 +1,7 @@
-function Message ({msg, deleteMsg}) {
+function Message ({msg, onClick}) {
     return(
-        <li style={style.message}>
-            {msg}
+        <li style={style.message} data-id={msg.id} onClick={onClick} >
+            {msg.text}
         </li>
     )
 }

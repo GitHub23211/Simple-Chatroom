@@ -45,4 +45,24 @@ const getMessages = (user, num, id) => {
               .then(response => response.data)
 }
 
-export default { getConversations, createConversation, sendMessage, getMessages }
+const getMessage = (user, convoId, msgId) => {
+  const headers = {
+    headers: {
+      "Authorization": 'basic ' + user.token
+    }
+  }
+  return axios.get(url+`${convoId}/${msgId}`, headers)
+              .then(response => response.data)
+}
+
+const deleteMessage = (user, convoId, msgId) => {
+  const headers = {
+    headers: {
+      "Authorization": 'basic ' + user.token
+    }
+  }
+  return axios.delete(url+`${convoId}/${msgId}`, headers)
+              .then(response => response.data)
+}
+
+export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage }
