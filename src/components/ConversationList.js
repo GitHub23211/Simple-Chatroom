@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom"
 import {useState, useEffect} from 'react'
 import {convoService} from '../To be categorised/'
+import {Conversation} from './'
 
 function ConversationList({currentUser}) {
-    const [newConvoName, setNewConvoName] = useState("Enter name of conversation...")
+    const [newConvoName, setNewConvoName] = useState("")
     const [myConvos, setMyConvos] = useState([])
 
   
@@ -30,12 +31,13 @@ function ConversationList({currentUser}) {
     console.log("component reloaded")
 
     return(
-        <div className="convo-list">
+        <div className="convo-list" style={style.convoList}>
+            <h6><strong>Your Conversations</strong></h6>
             <ul>
                 {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
             </ul>
             <form onSubmit={createConversation}>
-                <input value={newConvoName} onChange={onChangeConvoTitle}></input>
+                <input className="u-full-width" placeholder="Enter Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
                 <button>
                     Create Conversation
                 </button>
@@ -45,6 +47,10 @@ function ConversationList({currentUser}) {
 }
 
 const style = {
+    convoList: {
+        margin: "5% 0% 0% 5%"
+    },
+
     convoName: {
         listStyle: 'none'
     }

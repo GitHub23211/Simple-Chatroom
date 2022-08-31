@@ -1,4 +1,4 @@
-import Message from './Message'
+import {Message, ConversationList} from './'
 import {useState, useEffect} from 'react'
 import {convoService} from '../To be categorised/'
 import {useParams} from "react-router-dom"
@@ -37,12 +37,20 @@ function Conversation({currentUser}) {
     useEffect(getMessages, [])
 
     console.log("component reloaded")
-    
+
     return(
-        <div>
-            {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
-            <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg}/>
-        </div>  
+        <div className="row">
+            <div className="two columns">
+                <ConversationList currentUser={currentUser}/>
+            </div>
+            <div className="ten columns">
+                {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
+                <div>
+                    <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
+                </div>
+            </div>
+     
+        </div>
     )
 }
 

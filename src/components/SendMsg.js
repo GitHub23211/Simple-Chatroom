@@ -1,7 +1,7 @@
-function SendMsg ({sendMsg, currMsg, onChange}) {
+function SendMsg ({sendMsg, currMsg, onChange, placeholder}) {
     return (
         <form onSubmit={sendMsg}>
-            <input value={currMsg} onChange={onChange}></input>
+            <input className="u-full-width" placeholder={placeholder} value={currMsg} onChange={onChange}></input>
             <button>
                 Send
             </button>
