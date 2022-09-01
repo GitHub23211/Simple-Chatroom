@@ -4,15 +4,22 @@ const jwt = require(`jsonwebtoken`)
 
 const SECRET ="secret"
 
+const encodeToken = (id, username) => {
+    const userForToken = {
+        id: id,
+        username: username
+    }
+    return jwt.sign(userForToken, SECRET)
+}
+
+
 /* Create a new session for a user */
 const createSession = async (request, response) => {
 
     let password = ""
-
     await bcrypt.hash(request.body.password, 10)
           .then(response => password = response)
 
-    
     const session = new models.Session({
         username: request.body.username,
         password: password
@@ -25,12 +32,7 @@ const createSession = async (request, response) => {
 
     if (returned) {
         if (session._id) {
-            const userForToken = {
-                id: session._id,
-                username: returned.username
-            }
-            const token = jwt.sign(userForToken, SECRET)
-    
+            const token = encodeToken(session._id, returned.username)
             return response.status(200).json({status: "success", token: token})
         }
     }
@@ -40,22 +42,25 @@ const createSession = async (request, response) => {
 const getUser = async (request, response) => {
 
     const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
-        const token = authHeader.substring(6)
+    if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
         try {
-            // this will throw an error if token isn't of the right format
-            const match = await models.Session.findById(token)  
-            if (match) {
-                response.json({
-                    status: "success",
-                    username: match.username,
-                    token: match._id
-                })       
-            }
-        } catch { }
+                const decodedToken = jwt.verify(authHeader.substring(7), SECRET)
+                const userId = decodedToken.id
+                // this will throw an error if token isn't of the right format
+                const match = await models.Session.findById(userId)  
+                if (match) {
+                    response.json({
+                        status: "success",
+                        id: match._id,
+                        username: match.username
+                    })       
+                }
+        } catch {response.json({stauts: "missing or invalid token"})}
 
+    } 
+    else {
+        response.json({status: "unregistered"}) 
     }
-    response.json({status: "unregistered"}) 
 }
 
 /* 
@@ -65,8 +70,8 @@ const getUser = async (request, response) => {
 const validUser = async (request) => {
     
     const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
-        const token = authHeader.substring(6)        
+    if (authHeader && authHeader.toLowerCase().startsWith('Bearer ')) {
+        const token = authHeader.substring(7)        
         const match = await models.Session.findOne({_id: token})  
 
         if (match) {
@@ -92,14 +97,9 @@ const loginUser = async (request, response) => {
     }
 
     if(await bcrypt.compare(password, match.password)) {
-        const userForToken = {
-            id: match._id,
-            username: match.username
-        }
-        const token = jwt.sign(userForToken, SECRET)
+        const token = encodeToken(match._id, match.username)
         return response.status(200).json({status: "success", token: token})
     }
-
     return response.status(401).json({error: "invalid username or password"})
 }
 

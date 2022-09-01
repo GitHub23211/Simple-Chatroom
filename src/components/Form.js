@@ -39,13 +39,13 @@ function Form ({userState}) {
     const registerNewUser = (event) => {
         event.preventDefault()
         auth.registerUser(createUserInfo())
-        .then(response => response.token ? console.log(response.token) : console.log("username taken"))
+        .then(response => response.token ? console.log(response.token) : console.log(response))
     }
 
     const loginUser = (event) => {
         event.preventDefault()
         auth.loginUser(createUserInfo())
-            .then(response => response.token ? console.log(response.token) : console.log("username or password invalid"))
+            .then(response => response.token ? console.log(response.token) : console.log(response))
 
     }
 
