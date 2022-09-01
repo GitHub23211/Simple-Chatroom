@@ -45,7 +45,7 @@ function Conversation({currentUser}) {
 
                 <div className="row">
                     <div style={style.list}>
-                            <ConversationList currentUser={currentUser}/>
+                        <ConversationList currentUser={currentUser}/>
                     </div>
                 </div>
 

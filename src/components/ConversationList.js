@@ -31,15 +31,15 @@ function ConversationList({currentUser}) {
     console.log("ConversationList reloaded")
 
     return(
-        <div className="convo-list" style={style.convoList}>
+        <div className="convo-list" style={style.container}>
             <form onSubmit={createConversation}>
                 <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
                 <button class="u-full-width">
                     Create
                 </button>
             </form>
-            <h6 style={style.title}><strong>Your Conversations</strong></h6>
-            <ul>
+            <h6 style={style.title}><strong>Conversations</strong></h6>
+            <ul style={style.list}>
                 {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
             </ul>
         </div>
@@ -47,22 +47,22 @@ function ConversationList({currentUser}) {
 }
 
 const style = {
-    convoList: {
+    container: {
         margin: "3% 0% 0% 3%",
-        paddingRight: "3%",
-        height: "80vh",
-        overflow: "scroll",
-        overflowX: "hidden"
+        height: "80vh"
     },
 
     convoName: {
         listStyle: 'none'
     },
-    
+   
     title: {
         textAlign: "center"
-    }
+    },
 
+    list: {
+        paddingBottom: "1%"
+    }
 }
 
 

@@ -1,5 +1,5 @@
-import {Conversation, ConversationList, Home} from './components'
-import { Landing } from './pages'
+import {Conversation, ConversationList, Form} from './components'
+import { Home } from './pages'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
@@ -13,13 +13,12 @@ function App() {
             <div className="nav-menu" style={style.menu}>
               <Link style={style.link} to="/">Home</Link>
               <Link style={style.link} to="/conversations">Conversations</Link>
-              <Link style={style.link} to="/registration">Registrations</Link>
             </div>
         </header>
 
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/registration" element={<Landing />}/>
+          <Route path="/login" element={<Home />}/>
           <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
         </Routes>
