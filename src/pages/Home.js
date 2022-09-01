@@ -1,21 +1,12 @@
 import {useState} from 'react'
 import {Form} from '../components'
 
-function Home({userState}) {
-    const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
-    
+function Home({toRegister, setUser}) {   
     return (
         <div style={style.container} className="container">
-        {/* <div className="row" style={style.div}>
-              <h2 style={style.text}>Register</h2>
-              <div style={style.buttons}>
-                <a class="button button-primary" onClick={chooseLogin}>Login</a>
-                <button type="button" class="button button-primary" onClick={chooseLogin}>Register</button>
-            </div>
-          </div> */}
-          <h1 style={style.text}> {userState ? "Register for Free!" : "Welcome Back!"} </h1>
+          <h1 style={style.text}> {toRegister ? "Register for Free!" : "Welcome Back!"} </h1>
           <div>
-              <Form userState={userState}/>
+              <Form toRegister={toRegister} setUser={setUser}/>
           </div>
       </div>
     )

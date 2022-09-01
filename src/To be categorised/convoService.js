@@ -1,33 +1,29 @@
 import axios from 'axios'
+import auth from './auth'
 
 const url = 'http://localhost:8102/api/conversations/'
 
-const getConversations = (user) => {
-    const headers = {
-        headers: {
-          "Authorization": 'basic ' + user.token
-        }
+const headers = null
+
+const setHeaders = () => {
+  return {
+    headers: {
+      "Authorization": 'bearer ' + auth.getToken()
     }
+  }
+}
+
+const getConversations = () => {
     return axios.get(url, headers)
                 .then(response => response.data.conversations)
 }
 
-const createConversation = (user, title) => {
-    const headers = {
-        headers: {
-          "Authorization": 'basic ' + user.token
-        }
-    }
+const createConversation = (title) => {
     return axios.post(url, title, headers)
                 .then(response => response.data)
 }
 
-const sendMessage = (user, message, id) => {
-    const headers = {
-        headers: {
-          "Authorization": 'basic ' + user.token
-        }
-    }
+const sendMessage = (message, id) => {
     return axios.post(url+id, message, headers)
                 .then(response => response.data)
 }
@@ -45,22 +41,12 @@ const getMessages = (user, num, id) => {
               .then(response => response.data)
 }
 
-const getMessage = (user, convoId, msgId) => {
-  const headers = {
-    headers: {
-      "Authorization": 'basic ' + user.token
-    }
-  }
+const getMessage = (convoId, msgId) => {
   return axios.get(url+`${convoId}/${msgId}`, headers)
               .then(response => response.data)
 }
 
-const deleteMessage = (user, convoId, msgId) => {
-  const headers = {
-    headers: {
-      "Authorization": 'basic ' + user.token
-    }
-  }
+const deleteMessage = (convoId, msgId) => {
   return axios.delete(url+`${convoId}/${msgId}`, headers)
               .then(response => response.data)
 }

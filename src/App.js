@@ -2,9 +2,12 @@ import {Conversation, ConversationList, Form} from './components'
 import {Home} from './pages'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
+import { auth } from './To be categorised'
 
 function App() {
-  const [user, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
+  const [user, setUser] = useState(null)
+  auth.setToken(user)
+  console.log(auth.getToken())
 
   return (
     <Router>
@@ -17,8 +20,8 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<Home userState={false}/>}/>
-          <Route path="/register" element={<Home userState={true}/>}/>
+          <Route path="/" element={<Home toRegister={false} setUser={setUser}/>}/>
+          <Route path="/register" element={<Home toRegister={true} setUser={setUser}/>}/>
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={user}/>}/>
         </Routes>

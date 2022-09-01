@@ -25,7 +25,7 @@ function oldUser() {
     )
 }
 
-function Form ({userState}) {
+function Form ({toRegister, setUser}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -39,18 +39,18 @@ function Form ({userState}) {
     const registerNewUser = (event) => {
         event.preventDefault()
         auth.registerUser(createUserInfo())
-        .then(response => response.token ? console.log(response.token) : console.log(response))
+        .then(response => response.token ? setUser(response.token) : console.log(response))
     }
 
     const loginUser = (event) => {
         event.preventDefault()
         auth.loginUser(createUserInfo())
-            .then(response => response.token ? console.log(response.token) : console.log(response))
+            .then(response => response.token ? setUser(response.token) : console.log(response))
 
     }
 
-    const onSubmit = userState ? registerNewUser : loginUser
-    const buttonText = userState ? newUser() : oldUser()
+    const onSubmit = toRegister ? registerNewUser : loginUser
+    const buttonText = toRegister ? newUser() : oldUser()
 
     return (
         <form style={style.form} onSubmit={onSubmit}>
