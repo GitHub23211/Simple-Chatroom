@@ -2,7 +2,7 @@ import { Conversation, ConversationList, UserInfo } from './components'
 import { Home } from './pages'
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import { auth, convoService } from './To be categorised'
+import { auth, convoService } from './services'
 
 function App() {
   const [user, setUser] = useState(null)

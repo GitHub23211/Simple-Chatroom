@@ -32,7 +32,7 @@ function ConversationList({}) {
         <div className="container" style={style.container}>
             <form onSubmit={createConversation}>
                 <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
-                <button class="u-full-width">
+                <button className="u-full-width">
                     Create
                 </button>
             </form>
