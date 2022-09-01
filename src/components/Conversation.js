@@ -1,6 +1,6 @@
 import {Message, ConversationList} from './'
 import {useState, useEffect} from 'react'
-import {convoService} from '../To be categorised/'
+import {convoService} from '../services'
 import {useParams} from "react-router-dom"
 import {SendMsg} from './'
 

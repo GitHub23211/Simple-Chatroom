@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {Link} from "react-router-dom"
-import {auth} from '../To be categorised'
+import {auth} from '../services'
 
 function newUser() {
     return (

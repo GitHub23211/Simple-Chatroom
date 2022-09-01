@@ -1,5 +1,4 @@
 import axios from 'axios'
-import auth from './auth'
 
 const url = 'http://localhost:8102/api/conversations/'
 

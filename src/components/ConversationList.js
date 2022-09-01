@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 import {useState, useEffect} from 'react'
-import {convoService} from '../To be categorised/'
+import {convoService} from '../services'
 
 function ConversationList({}) {
     const [newConvoName, setNewConvoName] = useState("")

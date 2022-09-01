@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {auth} from '../To be categorised'
+import {auth} from '../services'
 
 function UserInfo({user}) {
     const [username, setUsername] = useState("")
