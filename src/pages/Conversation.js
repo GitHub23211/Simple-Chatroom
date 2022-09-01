@@ -1,8 +1,8 @@
-import {Message, ConversationList} from './'
+import {Message, ConversationList} from '../components'
 import {useState, useEffect} from 'react'
 import {convoService} from '../services'
 import {useParams} from "react-router-dom"
-import {SendMsg} from './'
+import {SendMsg} from '../components'
 
 function Conversation({}) {
     const [myMsgs, setMyMsgs] = useState([])

@@ -1,8 +1,8 @@
-import { Conversation, ConversationList, UserInfo } from './components'
-import { Home } from './pages'
+import { ConversationList, UserInfo } from './components'
+import { Home, Conversation } from './pages'
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import { auth, convoService } from './services'
+import { convoService } from './services'
 
 function App() {
   const [user, setUser] = useState(null)
