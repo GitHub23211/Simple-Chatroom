@@ -1,24 +1,73 @@
 import {Link} from "react-router-dom"
+import {auth} from '../To be categorised'
 
-function Form ({registerUser, onChange}) {
+function newUser() {
     return (
-        <form style={style.form} onSubmit={registerUser}>
-                <div >
-                    <label style={style.label} for="username">Username</label>
-                    <input  style={style.input} class="u-full-width" id="username" type="text" onChange={onChange[0]}></input>
-                </div>
+        <div>
+            <button style={style.input} class="button button-primary" type="submit">
+                Register
+            </button>
+            <p>Already have an account? <Link to="/">Log in</Link></p> 
+        </div>
+    )
+}
 
-            <div >
-                    <label style={style.label} for="passwrod">Password</label>
-                    <input style={style.input} class="u-full-width" id="password" type="password" onChange={onChange[1]}></input>
-                </div>
-
+function oldUser() {
+    return (
+        <div>
             <button style={style.input} class="button button-primary" type="submit">
                 Log In
             </button>
 
-            <p>Need an account? <Link to="/register">Register</Link></p>
+            <p>Need an account? <Link to="/register">Register</Link></p> 
+        </div>
+    )
+}
 
+function Form ({userState}) {
+    const registerNewUser = (event) => {
+        // auth.registerUser(event)
+        // .then(response => {
+        //   if(response.token) {
+        //         changeUser(response)
+        //         console.log("registration succcess", currentUser)
+        //     }   
+        //     console.log(currentUser)
+        //     console.log(response)
+        // })
+        event.preventDefault()
+        console.log("registered")
+    }
+
+    const loginUser = (event) => {
+        event.preventDefault()
+        console.log('logged in')
+    }
+    
+    const onChangeRegisterFormName = (event) => {
+        console.log(event.target.value)
+    }
+    
+    const onChangeRegisterFormPassword = (event) => {
+        console.log(event.target.value)
+    }
+
+    const onSubmit = userState ? registerNewUser : loginUser
+    const buttonText = userState ? newUser() : oldUser()
+    console.log(userState)
+
+    return (
+        <form style={style.form} onSubmit={onSubmit}>
+                <div >
+                    <label style={style.label} for="username">Username</label>
+                    <input  style={style.input} class="u-full-width" id="username" type="text" onChange={onChangeRegisterFormName}></input>
+                </div>
+
+            <div >
+                    <label style={style.label} for="passwrod">Password</label>
+                    <input style={style.input} class="u-full-width" id="password" type="password" onChange={onChangeRegisterFormPassword}></input>
+                </div>
+            {buttonText}
         </form>
     )
 }

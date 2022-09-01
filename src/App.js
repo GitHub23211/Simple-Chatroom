@@ -1,5 +1,5 @@
 import {Conversation, ConversationList, Form} from './components'
-import { Home } from './pages'
+import {Home} from './pages'
 import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
@@ -17,8 +17,8 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Home />}/>
+          <Route path="/" element={<Home userState={false}/>}/>
+          <Route path="/register" element={<Home userState={true}/>}/>
           <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
         </Routes>

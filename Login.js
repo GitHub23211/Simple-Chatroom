@@ -1,33 +1,34 @@
 import {useState} from 'react'
-import {auth} from '../To be categorised'
-import {Form} from '../components'
+import {auth} from './src/To be categorised'
+import {Form} from './src/components'
 
-function Registration() {
+function Login() {
     const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
     
     const registerNewUser = (event) => {
         auth.registerUser(event)
         .then(response => {
           if(response.token) {
-            changeUser(response)
-            console.log("registration succcess", currentUser)
-          }
-          console.log(currentUser)
-          console.log(response)
+                changeUser(response)
+                console.log("registration succcess", currentUser)
+            }   
+            console.log(currentUser)
+            console.log(response)
         })
-      }
+    }
     
     const onChangeRegisterFormName = (event) => {
-    console.log(event.target.value)
+        console.log(event.target.value)
     }
     
     const onChangeRegisterFormPassword = (event) => {
-    console.log(event.target.value)
+        console.log(event.target.value)
     }
   
     const chooseLogin = (event) => {
-    console.log(event)
+        console.log(event)
     }
+    
     return (
         <div style={style.container} className="container">
         {/* <div className="row" style={style.div}>
@@ -65,4 +66,4 @@ const style = {
   }
 
   
-export default Registration
+export default Login

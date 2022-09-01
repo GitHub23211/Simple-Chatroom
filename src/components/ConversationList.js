@@ -31,7 +31,7 @@ function ConversationList({currentUser}) {
     console.log("ConversationList reloaded")
 
     return(
-        <div className="convo-list" style={style.container}>
+        <div className="container" style={style.container}>
             <form onSubmit={createConversation}>
                 <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
                 <button class="u-full-width">
@@ -40,7 +40,7 @@ function ConversationList({currentUser}) {
             </form>
             <h6 style={style.title}><strong>Conversations</strong></h6>
             <ul style={style.list}>
-                {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
+                {myConvos.map(convo => <li style={style.convoName} key={convo.id}><Link style={style.link} to={`/conversations/${convo.id}`}>{convo.title}</Link></li>)}
             </ul>
         </div>
     )
@@ -48,12 +48,17 @@ function ConversationList({currentUser}) {
 
 const style = {
     container: {
-        margin: "3% 0% 0% 3%",
-        height: "80vh"
+        marginTop: "3%"
+    },
+
+    link: {
+        display: "block",
+        width: "65%",
+        border: "solid 1px black"
     },
 
     convoName: {
-        listStyle: 'none'
+        listStyle: 'none',
     },
    
     title: {

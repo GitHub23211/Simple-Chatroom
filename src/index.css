@@ -15,11 +15,3 @@ code {
 a:link {
   text-decoration: none;
 }
-
-.nav-menu a:hover {
-  border: green 1px solid;
-}
-
-.convo-list li:hover {
-  border: green 1px solid;
-}
