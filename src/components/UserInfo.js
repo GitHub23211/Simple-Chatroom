@@ -14,7 +14,7 @@ function UserInfo({user}) {
 
     return(
         <>
-        <h1>{username}</h1>
+        <h6>{username}</h6>
         </>
     )
 }

@@ -1,8 +1,9 @@
+require('dotenv').config()
 const models = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require(`jsonwebtoken`)
 
-const SECRET ="secret"
+const SECRET = process.env.SESSION_DB_SECRET
 
 const encodeToken = (id, username) => {
     const userForToken = {

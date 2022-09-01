@@ -16,7 +16,6 @@ function App() {
               <Link style={style.link} to="/">Home</Link>
               <Link style={style.link} to="/conversations">Conversations</Link>
             </div>
-            {user ? <UserInfo user={user}/> : <></>}
         </header>
 
         <Routes>
@@ -25,6 +24,7 @@ function App() {
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={user}/>}/>
         </Routes>
+        {user ? <UserInfo style={style.link} user={user}/> : <></>}
     </Router>
   );
 }
@@ -57,14 +57,7 @@ const style = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 5
-    },
-
-    userInfo: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexGrow: 1
+        flexGrow: 1
     }
 }
 
