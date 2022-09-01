@@ -70,14 +70,18 @@ const getUser = async (request, response) => {
 const validUser = async (request) => {
     
     const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('Bearer ')) {
-        const token = authHeader.substring(7)        
-        const match = await models.Session.findOne({_id: token})  
+    if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
+        try{
+            const decodedToken = jwt.verify(authHeader.substring(7), SECRET)
+            const userId = decodedToken.id     
+            const match = await models.Session.findOne({_id: userId})  
 
-        if (match) {
-            return match._id
+            if (match) {
+                return match._id
+            }
         }
-    } 
+        catch {response.json({stauts: "missing or invalid token"})}
+    }
     return false
 }
 
