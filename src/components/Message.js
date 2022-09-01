@@ -1,10 +1,17 @@
 import {useState} from 'react'
-import {convoService} from '../services'
+import {auth, convoService} from '../services'
 
-function Message ({msg, onClick, currentConvo}) {
+function Message ({msg, onClick, currentConvo, user}) {
     const [button, setButton] = useState(false)
+
     const showButton = () => {
-        setButton(!button)
+        convoService.getMessage(currentConvo, msg.id)
+                    .then(response => auth.getUser(user)
+                                          .then(user => {
+                                                if(response.creator === user.username) {
+                                                    setButton(!button)
+                                                }
+                                          }))
     }
 
     return(

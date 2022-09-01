@@ -26,8 +26,6 @@ function ConversationList({}) {
 
     useEffect(getConversations, [])
 
-    console.log("ConversationList reloaded")
-
     return(
         <div className="container" style={style.container}>
             <form onSubmit={createConversation}>

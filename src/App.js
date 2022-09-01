@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Home toRegister={false} user={user} setUser={setUser}/>}/>
           <Route path="/register" element={<Home toRegister={true} user={user} setUser={setUser}/>}/>
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
-          <Route path="/conversations/:convoId" element={<Conversation currentUser={user}/>}/>
+          <Route path="/conversations/:convoId" element={<Conversation user={user}/>}/>
         </Routes>
     </Router>
   );

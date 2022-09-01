@@ -4,7 +4,7 @@ import {convoService} from '../services'
 import {useParams} from "react-router-dom"
 import {SendMsg} from '../components'
 
-function Conversation({}) {
+function Conversation({user}) {
     const [myMsgs, setMyMsgs] = useState([])
     const [currentMsg, setCurrentMsg] = useState("")
     const currentConvo = useParams().convoId
@@ -35,9 +35,6 @@ function Conversation({}) {
     }
 
     useEffect(getMessages, [currentConvo])
-
-    console.log("Conversation reloaded")
-
     return(
         <div>
             <div style={style.layout}>
@@ -49,7 +46,7 @@ function Conversation({}) {
                 <div style={style.chat}>
                     <div style={style.convo}>
                         <div className="msgList" style={style.messages} >
-                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
+                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} currentConvo={currentConvo} user={user} onClick={deleteMessage}/>)}
                         </div>
 
                         <div style={style.input}>
