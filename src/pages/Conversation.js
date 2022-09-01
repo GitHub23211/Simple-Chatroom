@@ -15,8 +15,8 @@ function Conversation({}) {
                   .then(response => setMyMsgs(response.messages.reverse()))
     }
 
-    const deleteMessage = (event) => {
-        convoService.deleteMessage(currentConvo, event.target.attributes[0].value)
+    const deleteMessage = (msgId) => {
+        convoService.deleteMessage(currentConvo, msgId)
                 .then(response => getMessages())
     }
 
