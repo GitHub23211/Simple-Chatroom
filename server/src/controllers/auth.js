@@ -1,4 +1,5 @@
 const models = require('../models')
+const bcrypt = require('bcrypt')
 
 /* Create a new session for a user */
 const createSession = async (request, response) => {
@@ -63,4 +64,22 @@ const validUser = async (request) => {
     return false
 }
 
-module.exports = { validUser, getUser, createSession }
+const loginUser = async (request, response) => {
+    const username = request.body.username
+    const password = request.body.password
+
+    const match = await models.Session.findOne({username: username})
+
+    if(!match) {
+        return response.status(401).json({error: "invalid username or password"})
+    }
+
+    if(await bcrypt.compare(password, match.username)) {
+        console.log("user is good")
+        return response.json({status: "success"})
+    }
+
+    return response.status(401).json({error: "invalid username or password"})
+}
+
+module.exports = { validUser, getUser, createSession, loginUser }

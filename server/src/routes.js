@@ -13,6 +13,9 @@ router.post('/auth/register', auth.createSession)
 
 router.get('/auth/', auth.getUser)
 
+/* POST user credentials to log them into the server */
+router.post(`/auth/login`, auth.loginUser)
+
 /* GET conversations returns a list of all current conservations */
 router.get('/api/conversations', conv.getConversations)
 
@@ -30,6 +33,8 @@ router.get('/api/conversations/:id/:msgid', messages.getMessage)
 
 /* DELETE to message URL to delete the message */
 router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
+
+
 
 
 module.exports = router 
