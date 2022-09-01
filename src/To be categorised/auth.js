@@ -6,7 +6,7 @@ let token = null
 const getUser = (user) => {
   const headers = {
     headers: {
-      "Authorization": 'basic ' + user.token
+      "Authorization": 'bearer ' + user.token
     }
   }
   return axios.get(url, headers)

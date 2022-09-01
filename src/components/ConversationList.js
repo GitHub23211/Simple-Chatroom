@@ -1,24 +1,22 @@
 import {Link} from "react-router-dom"
 import {useState, useEffect} from 'react'
 import {convoService} from '../To be categorised/'
-import {Conversation} from './'
 
-function ConversationList({currentUser}) {
+function ConversationList({}) {
     const [newConvoName, setNewConvoName] = useState("")
     const [myConvos, setMyConvos] = useState([])
 
-  
     const createConversation = (event) => {
       event.preventDefault()
       const payload = {
         "title": event.target[0].value
       }
-      convoService.createConversation(currentUser, payload)
+      convoService.createConversation(payload)
                   .then(response => {setNewConvoName(""); getConversations()})
     }
   
     const getConversations = () => {
-        convoService.getConversations(currentUser)
+        convoService.getConversations()
           .then(response => {console.log(response); setMyConvos(response)})
     }
   

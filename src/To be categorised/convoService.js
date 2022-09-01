@@ -3,10 +3,10 @@ import auth from './auth'
 
 const url = 'http://localhost:8102/api/conversations/'
 
-const headers = null
+let headers = null
 
 const setHeaders = () => {
-  return {
+  headers = {
     headers: {
       "Authorization": 'bearer ' + auth.getToken()
     }
@@ -28,10 +28,10 @@ const sendMessage = (message, id) => {
                 .then(response => response.data)
 }
 
-const getMessages = (user, num, id) => {
+const getMessages = (num, id) => {
   const headers = {
     headers: {
-      "Authorization": 'basic ' + user.token
+      "Authorization": 'bearer ' + auth.getToken()
     },
     params: {
       "num": num
@@ -51,4 +51,4 @@ const deleteMessage = (convoId, msgId) => {
               .then(response => response.data)
 }
 
-export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage }
+export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage, setHeaders }

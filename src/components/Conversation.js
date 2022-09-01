@@ -4,20 +4,20 @@ import {convoService} from '../To be categorised/'
 import {useParams} from "react-router-dom"
 import {SendMsg} from './'
 
-function Conversation({currentUser}) {
+function Conversation({}) {
     const [myMsgs, setMyMsgs] = useState([])
     const [currentMsg, setCurrentMsg] = useState("")
     const currentConvo = useParams().convoId
 
 
     const getMessages = () => {
-        convoService.getMessages(currentUser, 20, currentConvo)
+        convoService.getMessages(20, currentConvo)
                   .then(response => setMyMsgs(response.messages.reverse()))
     }
 
     const deleteMessage = (event) => {
         console.log( event.target.attributes)
-        convoService.deleteMessage(currentUser, currentConvo, event.target.attributes[0].value)
+        convoService.deleteMessage(currentConvo, event.target.attributes[0].value)
                 .then(response => getMessages())
     }
 
@@ -26,7 +26,7 @@ function Conversation({currentUser}) {
         const message = {
           "text": event.target[0].value
         }
-        convoService.sendMessage(currentUser, message, currentConvo)
+        convoService.sendMessage(message, currentConvo)
         .then(response => {setCurrentMsg(""); getMessages()})
     }
 
@@ -45,7 +45,7 @@ function Conversation({currentUser}) {
 
                 <div className="row">
                     <div style={style.list}>
-                        <ConversationList currentUser={currentUser}/>
+                        <ConversationList />
                     </div>
                 </div>
 
