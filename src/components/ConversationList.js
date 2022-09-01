@@ -51,8 +51,7 @@ const style = {
 
     link: {
         display: "block",
-        width: "65%",
-        border: "solid 1px black"
+        width: "65%"
     },
 
     convoName: {
@@ -60,7 +59,7 @@ const style = {
     },
    
     title: {
-        textAlign: "center"
+        // textAlign: "center"
     },
 
     list: {

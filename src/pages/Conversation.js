@@ -42,23 +42,22 @@ function Conversation({}) {
         <div>
             <div style={style.layout}>
 
-                <div className="row">
-                    <div style={style.list}>
-                        <ConversationList />
+                <div style={style.list}>
+                    <ConversationList />
+                </div>
+
+                <div style={style.chat}>
+                    <div style={style.convo}>
+                        <div className="msgList" style={style.messages} >
+                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
+                        </div>
+
+                        <div style={style.input}>
+                            <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
+                        </div>
                     </div>
                 </div>
 
-                <div style={style.convo}>
-                    <div style={style.messages} >
-                        {myMsgs.map(msg => <Message key={msg.id} msg={msg} onClick={deleteMessage}/>)}
-                    </div>
-
-                    <div style={style.input}>
-                        <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
-                    </div>
-                </div>
-
-                
             </div>
         </div>
     )
@@ -69,11 +68,17 @@ const style = {
         display: "flex",
         flexFlow: "row wrap-reverse"
     },
+    
+    list: {
+    },
+
+    chat: {
+        flexGrow: 1
+    },
 
     convo: {
         display: "grid",
-        gridTemplateColumns: "5fr",
-        flexGrow: 1
+        gridTemplateColumns: "5fr"
     },
 
     messages: {
@@ -91,11 +96,6 @@ const style = {
         gridRow: 2,
         width: "65.333333%",
         marginLeft: "3%"
-    },
-
-    list: {
-        flexGrow: 1,
-        width: "100%"
     }
 }
 

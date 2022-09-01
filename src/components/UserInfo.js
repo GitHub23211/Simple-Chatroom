@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import {Link} from "react-router-dom"
 import {auth} from '../services'
 
 function UserInfo({user}) {
@@ -13,9 +14,10 @@ function UserInfo({user}) {
     console.log("user is ", username)
 
     return(
-        <>
-        <h6>{username}</h6>
-        </>
+        <div>
+            <h6>{username}</h6>
+            <Link to="/profile">Profile</Link>
+        </div>
     )
 }
 

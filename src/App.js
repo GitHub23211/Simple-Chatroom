@@ -15,6 +15,7 @@ function App() {
             <div className="nav-menu" style={style.menu}>
               <Link style={style.link} to="/">Home</Link>
               <Link style={style.link} to="/conversations">Conversations</Link>
+              {user ? <UserInfo style={style.link} user={user}/> : <></>}
             </div>
         </header>
 
@@ -24,7 +25,6 @@ function App() {
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation currentUser={user}/>}/>
         </Routes>
-        {user ? <UserInfo style={style.link} user={user}/> : <></>}
     </Router>
   );
 }
