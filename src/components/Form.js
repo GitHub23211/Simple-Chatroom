@@ -5,7 +5,7 @@ import {auth} from '../To be categorised'
 function newUser() {
     return (
         <div>
-            <button style={style.input} class="button button-primary" type="submit">
+            <button style={style.input} className="button button-primary" type="submit">
                 Register
             </button>
             <p>Already have an account? <Link to="/">Log in</Link></p> 
@@ -16,7 +16,7 @@ function newUser() {
 function oldUser() {
     return (
         <div>
-            <button style={style.input} class="button button-primary" type="submit">
+            <button style={style.input} className="button button-primary" type="submit">
                 Log In
             </button>
 
@@ -55,13 +55,13 @@ function Form ({toRegister, setUser}) {
     return (
         <form style={style.form} onSubmit={onSubmit}>
                 <div >
-                    <label style={style.label} for="username">Username</label>
-                    <input  style={style.input} class="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
+                    <label style={style.label} htmlFor ="username">Username</label>
+                    <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
                 </div>
 
             <div >
-                    <label style={style.label} for="passwrod">Password</label>
-                    <input style={style.input} class="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
+                    <label style={style.label} htmlFor ="passwrod">Password</label>
+                    <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
                 </div>
             {buttonText}
         </form>

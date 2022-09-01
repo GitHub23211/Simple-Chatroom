@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 const url = 'http://localhost:8102/auth/'
-let token = null
 
 const getUser = (user) => {
   const headers = {
     headers: {
-      "Authorization": 'bearer ' + user.token
+      "Authorization": 'bearer ' + user
     }
   }
   return axios.get(url, headers)
@@ -23,12 +22,4 @@ const loginUser = (userToLogin) => {
               .then(response => response.data)
 }
 
-const setToken = (userToken) => {
-  token = userToken
-}
-
-const getToken = () => {
-  return token
-}
-
-export default {registerUser, getUser, loginUser, setToken, getToken}
+export default {registerUser, getUser, loginUser}

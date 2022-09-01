@@ -1,14 +1,12 @@
-import {Conversation, ConversationList, Form} from './components'
-import {Home} from './pages'
-import {useState} from 'react'
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
+import { Conversation, ConversationList, UserInfo } from './components'
+import { Home } from './pages'
+import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import { auth, convoService } from './To be categorised'
 
 function App() {
   const [user, setUser] = useState(null)
-  convoService.setHeaders()
-  auth.setToken(user)
-  console.log(auth.getToken())
+  convoService.setHeaders(user)
 
   return (
     <Router>
@@ -18,6 +16,7 @@ function App() {
               <Link style={style.link} to="/">Home</Link>
               <Link style={style.link} to="/conversations">Conversations</Link>
             </div>
+            {user ? <UserInfo user={user}/> : <></>}
         </header>
 
         <Routes>
@@ -58,7 +57,14 @@ const style = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 1
+        flexGrow: 5
+    },
+
+    userInfo: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexGrow: 1
     }
 }
 

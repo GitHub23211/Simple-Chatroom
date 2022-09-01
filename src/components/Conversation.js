@@ -16,7 +16,6 @@ function Conversation({}) {
     }
 
     const deleteMessage = (event) => {
-        console.log( event.target.attributes)
         convoService.deleteMessage(currentConvo, event.target.attributes[0].value)
                 .then(response => getMessages())
     }

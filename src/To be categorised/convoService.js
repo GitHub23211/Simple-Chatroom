@@ -5,10 +5,10 @@ const url = 'http://localhost:8102/api/conversations/'
 
 let headers = null
 
-const setHeaders = () => {
+const setHeaders = (user) => {
   headers = {
     headers: {
-      "Authorization": 'bearer ' + auth.getToken()
+      "Authorization": 'bearer ' + user
     }
   }
 }
@@ -29,14 +29,9 @@ const sendMessage = (message, id) => {
 }
 
 const getMessages = (num, id) => {
-  const headers = {
-    headers: {
-      "Authorization": 'bearer ' + auth.getToken()
-    },
-    params: {
+    headers["params"] = {
       "num": num
     }
-  }
   return axios.get(url+id, headers)
               .then(response => response.data)
 }
