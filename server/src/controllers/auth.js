@@ -2,6 +2,8 @@ const models = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require(`jsonwebtoken`)
 
+const SECRET ="secret"
+
 /* Create a new session for a user */
 const createSession = async (request, response) => {
 
@@ -27,7 +29,7 @@ const createSession = async (request, response) => {
                 id: session._id,
                 username: returned.username
             }
-            const token = jwt.sign(userForToken, "secret")
+            const token = jwt.sign(userForToken, SECRET)
     
             return response.status(200).json({status: "success", token: token})
         }
@@ -94,9 +96,7 @@ const loginUser = async (request, response) => {
             id: match._id,
             username: match.username
         }
-
-        const token = jwt.sign(userForToken, "secret")
-
+        const token = jwt.sign(userForToken, SECRET)
         return response.status(200).json({status: "success", token: token})
     }
 
