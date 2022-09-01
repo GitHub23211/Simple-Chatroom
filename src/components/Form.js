@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {Link} from "react-router-dom"
 import {auth} from '../To be categorised'
 
@@ -25,47 +26,42 @@ function oldUser() {
 }
 
 function Form ({userState}) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const createUserInfo = () => {
+        return {
+            username: username,
+            password: password
+        }
+    }
+
     const registerNewUser = (event) => {
-        // auth.registerUser(event)
-        // .then(response => {
-        //   if(response.token) {
-        //         changeUser(response)
-        //         console.log("registration succcess", currentUser)
-        //     }   
-        //     console.log(currentUser)
-        //     console.log(response)
-        // })
         event.preventDefault()
-        console.log("registered")
+        auth.registerUser(createUserInfo())
+        .then(response => response.token ? console.log(response.token) : console.log("username taken"))
     }
 
     const loginUser = (event) => {
         event.preventDefault()
-        console.log('logged in')
-    }
-    
-    const onChangeRegisterFormName = (event) => {
-        console.log(event.target.value)
-    }
-    
-    const onChangeRegisterFormPassword = (event) => {
-        console.log(event.target.value)
+        auth.loginUser(createUserInfo())
+            .then(response => response.token ? console.log(response.token) : console.log("username or password invalid"))
+
     }
 
     const onSubmit = userState ? registerNewUser : loginUser
     const buttonText = userState ? newUser() : oldUser()
-    console.log(userState)
 
     return (
         <form style={style.form} onSubmit={onSubmit}>
                 <div >
                     <label style={style.label} for="username">Username</label>
-                    <input  style={style.input} class="u-full-width" id="username" type="text" onChange={onChangeRegisterFormName}></input>
+                    <input  style={style.input} class="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
                 </div>
 
             <div >
                     <label style={style.label} for="passwrod">Password</label>
-                    <input style={style.input} class="u-full-width" id="password" type="password" onChange={onChangeRegisterFormPassword}></input>
+                    <input style={style.input} class="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
                 </div>
             {buttonText}
         </form>

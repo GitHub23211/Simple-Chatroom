@@ -1,11 +1,19 @@
 const models = require('../models')
 const bcrypt = require('bcrypt')
+const jwt = require(`jsonwebtoken`)
 
 /* Create a new session for a user */
 const createSession = async (request, response) => {
 
+    let password = ""
+
+    await bcrypt.hash(request.body.password, 10)
+          .then(response => password = response)
+
+    
     const session = new models.Session({
-        username: request.body.username
+        username: request.body.username,
+        password: password
     })
 
     const returned = await session.save()
@@ -15,11 +23,13 @@ const createSession = async (request, response) => {
 
     if (returned) {
         if (session._id) {
-            response.json({
-                status: "success",
-                username: returned.username,
-                token: returned._id
-            })
+            const userForToken = {
+                id: session._id,
+                username: returned.username
+            }
+            const token = jwt.sign(userForToken, "secret")
+    
+            return response.status(200).json({status: "success", token: token})
         }
     }
 }
@@ -64,6 +74,11 @@ const validUser = async (request) => {
     return false
 }
 
+/* 
+ * loginUser - Checks if the username and password in the request
+ *   parameter contains a valid user.
+ *   return the user's token if match, else send a 401 error.
+*/
 const loginUser = async (request, response) => {
     const username = request.body.username
     const password = request.body.password
@@ -74,9 +89,15 @@ const loginUser = async (request, response) => {
         return response.status(401).json({error: "invalid username or password"})
     }
 
-    if(await bcrypt.compare(password, match.username)) {
-        console.log("user is good")
-        return response.json({status: "success"})
+    if(await bcrypt.compare(password, match.password)) {
+        const userForToken = {
+            id: match._id,
+            username: match.username
+        }
+
+        const token = jwt.sign(userForToken, "secret")
+
+        return response.status(200).json({status: "success", token: token})
     }
 
     return response.status(401).json({error: "invalid username or password"})

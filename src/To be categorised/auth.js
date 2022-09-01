@@ -12,15 +12,14 @@ const getUser = (user) => {
               .then(response => response.data)
 }
 
-const registerUser = (event) => {
-  const newUser = createNewUser(event)
+const registerUser = (newUser) => {
   return axios.post(url+'register', newUser)
               .then(response => response.data)
 }
 
-const createNewUser = (event) => {
-  event.preventDefault()
-  return {"username": event.target[0].value}
+const loginUser = (userToLogin) => {
+  return axios.post(url+'login', userToLogin)
+              .then(response => response.data)
 }
 
-export default {registerUser, getUser}
+export default {registerUser, getUser, loginUser}

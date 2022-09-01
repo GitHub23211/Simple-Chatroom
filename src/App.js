@@ -4,7 +4,7 @@ import {useState} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
 function App() {
-  const [currentUser, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
+  const [user, changeUser] = useState({token: "630e072e6af13c96e18cf4aa"})
 
   return (
     <Router>
@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home userState={false}/>}/>
           <Route path="/register" element={<Home userState={true}/>}/>
-          <Route path="/conversations" element={<ConversationList currentUser={currentUser}/>}/>
-          <Route path="/conversations/:convoId" element={<Conversation currentUser={currentUser}/>}/>
+          <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
+          <Route path="/conversations/:convoId" element={<Conversation currentUser={user}/>}/>
         </Routes>
     </Router>
   );
