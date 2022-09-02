@@ -12,3 +12,4 @@
 * Passwords are now hashed with bcrypt before being sent to the database.
     * Added a new loginUser function in ./server/src/controllers/auth.js to make use of these passwords
 * Updated Authorization process to use JWTs instead of the userID.
+    * Created a secret phrase in the .env to store the validation token for JWT encryption/decryption.
