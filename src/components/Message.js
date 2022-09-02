@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {auth, convoService} from '../services'
+import pic from '../components/1.png'
 
 function Message ({msg, onClick, user}) {
     const [button, setButton] = useState(false)
@@ -15,14 +16,25 @@ function Message ({msg, onClick, user}) {
 
     return(
         <div style={style.container}>
-            <h6 style={style.creator}><strong>{msg.creator}</strong></h6>
-            <li className="msg" style={style.message} data-id={msg.id} onClick={showButton}>
-                {msg.text}
-            </li>
-            {button ? <>
-            <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
-            <button style={style.button} onClick={() => onClick(msg.id)}>React</button>
-            </> : <></>}
+
+            <div style={style.contents}>
+                <img style={style.avatar} src={pic} alt="user profile picture"/>
+
+                <h6 style={style.creator}><strong>{msg.creator}</strong></h6>
+
+                <li className="msg" style={style.message} data-id={msg.id} onClick={showButton}>
+                    {msg.text}
+                </li>
+
+                {button ? 
+                <>
+                <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
+                <button style={style.button} onClick={() => onClick(msg.id)}>React</button>
+                </> : <></>}
+            </div>
+
+
+
         </div>
     )
 }
@@ -32,14 +44,27 @@ const style = {
         paddingBottom: "8px"
     },
 
-    message: {
-        listStyle: "none",
-        maxWidth: "75ch",
-        wordBreak: "break-all",
+    contents: {
+        display: "flex",
+        width: "65%",
+        gap: "1rem"
+    },
+
+    avatar: {
+        maxHeight: "50px",
+        maxWidth: "50px",
     },
 
     creator: {
-        marginBottom: "-1px"
+        marginTop: "1rem",
+        textAlign: "center"
+    },
+
+    message: {
+        alignSelf: "flex-end",
+        listStyle: "none",
+        maxWidth: "75ch",
+        wordBreak: "break-all"
     },
 
     button: {
