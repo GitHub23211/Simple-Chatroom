@@ -21,13 +21,21 @@ function App() {
 
   return (
     <Router>
-        <header style={style.header}>
-          <div style={style.logo}>CHAT</div>
-            <div className="nav-menu" style={style.menu}>
-              <Link style={style.link} to="/">Home</Link>
-              {user ? <><Link style={style.link} to="/conversations">Conversations</Link>
-              <UserInfo style={style.link} user={user} setUser={setUser}/> </>: <></>}
-            </div>
+        <header>
+        <nav style={style.nav}>
+          <div style={style.logo}>
+            <h1>CHAT</h1>
+          </div>
+
+          <div style={style.menu}>
+            <Link style={style.link} to="/">Home</Link>
+            {user ? <Link style={style.link} to="/conversations">Conversations</Link> : <></>}
+          </div>
+
+          <div style={style.userinfo}>
+            {user ? <UserInfo user={user} setUser={setUser}/>: <></>}
+          </div>
+        </nav>
         </header>
 
         <Routes>
@@ -41,35 +49,34 @@ function App() {
 }
 
 const style = {
-    logo: {
-        gridColumn: 1,
-        display: 'inlineBlock',
-        textAlign: 'center',
-        fontSize: '250%',
-        fontWeight: 'bold',
-        marginRight: '50%',
-        marginLeft: '5%',
-    },
 
-    header: {
-        borderBottom: 'solid 1px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        padding: '0.3% 0% 0.3% 0%'
-    },
+  nav: {
+    borderBottom: 'solid 1px',
+    display: 'flex',
+    alignItems: "center"
+  },
+  
+  logo: {
+    textAlign: "center",
+    flexGrow: 1
+  },
 
-    menu: {
-        gridColumn: 2,
-        display: 'flex',
-        flexWrap: 'nowrap'
-    },
-      
-    link: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexGrow: 1
-    }
+  menu: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: "1rem",
+    flexGrow: 3,
+    textAlign: "center"
+  },
+
+  link: {
+    flexGrow: 1
+  },
+    
+  userinfo: {
+    flexGrow: 1,
+    textAlign: "center"
+  }
 }
 
 export default App;

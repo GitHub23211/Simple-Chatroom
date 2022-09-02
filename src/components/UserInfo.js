@@ -20,12 +20,41 @@ function UserInfo({user, setUser}) {
     useEffect(setName, [])
 
     return(
-        <div>
-            <h6>{username}</h6>
-            <Link to="/profile">Profile</Link>
-            <button onClick={logoutUser}>logout</button>
+        <div style={style.container}>
+
+            <div style={style.name}>
+                <div>{username}</div>
+            </div>
+        
+            <div style={style.profile}>
+                <Link to="/profile">Profile</Link>
+            </div>
+
+            <div style={style.logout}>
+                <button onClick={logoutUser}>logout</button>
+            </div>
+
         </div>
     )
+}
+
+const style = {
+    container: {
+        display: "flex",
+        alignItems: "center"
+    },
+
+    name: {
+        flexGrow: 1
+    },
+
+    profile: {
+        flexGrow: 1
+    },
+
+    logout: {
+        flexGrow: 1
+    }
 }
 
 export default UserInfo
