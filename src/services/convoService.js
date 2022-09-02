@@ -12,14 +12,14 @@ const setHeaders = (user) => {
   }
 }
 
+const createConversation = (title) => {
+  return axios.post(url, title, headers)
+              .then(response => response.data)
+}
+
 const getConversations = () => {
     return axios.get(url, headers)
                 .then(response => response.data.conversations)
-}
-
-const createConversation = (title) => {
-    return axios.post(url, title, headers)
-                .then(response => response.data)
 }
 
 const sendMessage = (message, id) => {
@@ -28,9 +28,9 @@ const sendMessage = (message, id) => {
 }
 
 const getMessages = (num, id) => {
-    headers["params"] = {
-      "num": num
-    }
+  headers["params"] = {
+    "num": num
+  }
   return axios.get(url+id, headers)
               .then(response => response.data)
 }

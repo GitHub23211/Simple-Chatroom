@@ -9,7 +9,7 @@ function ConversationList({}) {
     const createConversation = (event) => {
       event.preventDefault()
       const payload = {
-        "title": event.target[0].value
+        "title": event.target[0].value.toLowerCase()
       }
       convoService.createConversation(payload)
                   .then(response => {setNewConvoName(""); getConversations()})
@@ -19,17 +19,13 @@ function ConversationList({}) {
         convoService.getConversations()
           .then(response => {console.log(response); setMyConvos(response)})
     }
-  
-    const onChangeConvoTitle = (event) => {
-        setNewConvoName(event.target.value)
-    }
 
     useEffect(getConversations, [])
 
     return(
         <div className="container" style={style.container}>
             <form onSubmit={createConversation}>
-                <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={onChangeConvoTitle}></input>
+                <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={e => setNewConvoName(e.target.value)}></input>
                 <button className="u-full-width">
                     Create
                 </button>

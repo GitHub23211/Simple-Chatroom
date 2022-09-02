@@ -38,11 +38,12 @@ const getMessages = async (request, response) => {
     if (user) {
         const id = request.params.id
         const num = request.query.num
+        const convo = await models.Conversation.findById(id)
         const messages = await models.Message.find({conversation: id})
                 .populate('creator')
                 .sort({timestamp: -1})
                 .limit(num)
-        response.json({messages})
+        response.json({messages, convo})
     } else {
         response.sendStatus(401)
     }

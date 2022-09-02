@@ -7,12 +7,16 @@ import {SendMsg} from '../components'
 function Conversation({user}) {
     const [myMsgs, setMyMsgs] = useState([])
     const [currentMsg, setCurrentMsg] = useState("")
+    const [convoName, setConvoName] = useState("")
     const currentConvo = useParams().convoId
 
 
     const getMessages = () => {
         convoService.getMessages(20, currentConvo)
-                  .then(response => setMyMsgs(response.messages.reverse()))
+                  .then(response => {
+                    setConvoName(response.convo.title)
+                    setMyMsgs(response.messages.reverse())
+                })
     }
 
     const deleteMessage = (msgId) => {
@@ -50,7 +54,7 @@ function Conversation({user}) {
                         </div>
 
                         <div style={style.input}>
-                            <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message ${currentConvo}...`}/>
+                            <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message #${convoName}`}/>
                         </div>
                     </div>
                 </div>
