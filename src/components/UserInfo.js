@@ -41,6 +41,8 @@ function UserInfo({user, setUser}) {
 const style = {
     container: {
         display: "flex",
+        flexWrap: "wrap",
+        gap: "1rem",
         alignItems: "center"
     },
 

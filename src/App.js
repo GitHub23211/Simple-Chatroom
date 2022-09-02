@@ -75,7 +75,8 @@ const style = {
     
   userinfo: {
     flexGrow: 1,
-    textAlign: "center"
+    textAlign: "center",
+    marginLeft: "2%"
   }
 }
 
