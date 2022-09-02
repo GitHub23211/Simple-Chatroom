@@ -3,7 +3,7 @@ import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
 import pic from '../components/1.png'
 
-function Message ({msg, onClick, user, convoId}) {
+function Message ({msg, onClick, user}) {
     const [buttons, setButtons] = useState(false)
     const [showReactList, setReactList] = useState(false)
 
@@ -35,9 +35,13 @@ function Message ({msg, onClick, user, convoId}) {
                     <button style={style.button} onClick={() => {setButtons(false); setReactList(!showReactList)}}>React</button>
                 </> : <></>}
             </div>
+
+            <div>
+                {msg.reaction.emoji}
+            </div>
             
             <div>
-                {showReactList ? <ReactionList convoId={convoId} msgId={msg.id}/> : <></>}
+                {showReactList ? <ReactionList msgId={msg.id}/> : <></>}
             </div>
         </div>
     )

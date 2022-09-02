@@ -1,6 +1,8 @@
 import Reaction from './Reaction'
+import {useParams} from "react-router-dom"
 
-function ReactionList({convoId, msgId}) {
+function ReactionList({msgId}) {
+    const convoId = useParams().convoId
     
     const emojis = ['\u{1F44D}', '\u{1F44E}', '\u{1F44F}', '\u{1F600}', '\u{1F606}',
     '\u{1F60E}', '\u{1F60F}', '\u{1F610}', '\u{1F612}', '\u{1F614}', 
