@@ -20,8 +20,8 @@ function Message ({msg, onClick, user}) {
                 {msg.text}
             </li>
             {button ? <>
-            <button style={style.button} onClick={() => onClick(msg.id)}>Delete?</button> 
-            <button style={style.button} onClick={() => onClick(msg.id)}>react</button>
+            <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
+            <button style={style.button} onClick={() => onClick(msg.id)}>React</button>
             </> : <></>}
         </div>
     )
@@ -35,7 +35,7 @@ const style = {
     message: {
         listStyle: "none",
         maxWidth: "75ch",
-        wordBreak: "break-all"
+        wordBreak: "break-all",
     },
 
     creator: {
@@ -43,7 +43,7 @@ const style = {
     },
 
     button: {
-        fontSize: "70%"
+        marginTop: "-1%"
     },
 
     reaction: {
