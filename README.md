@@ -8,6 +8,7 @@
 * Added persistent log ins so that user is not logged out if they refresh the page.
 
 ## Backend Extensions
-* Modified Session schema so that it accepts passwords submitted by users
-* Passwords are now hashed with bcrypt before being sent to the database
-* Updated Authorization process to use JWTs instead of the userID in the database
+* Modified Session schema so that it accepts passwords submitted by users.
+* Passwords are now hashed with bcrypt before being sent to the database.
+    * Added a new loginUser function in ./server/src/controllers/auth.js to make use of these passwords
+* Updated Authorization process to use JWTs instead of the userID.
