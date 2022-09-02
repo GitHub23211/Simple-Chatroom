@@ -15,7 +15,7 @@ function App() {
             <div className="nav-menu" style={style.menu}>
               <Link style={style.link} to="/">Home</Link>
               <Link style={style.link} to="/conversations">Conversations</Link>
-              {user ? <UserInfo style={style.link} user={user}/> : <></>}
+              {user ? <UserInfo style={style.link} user={user} setUser={setUser}/> : <></>}
             </div>
         </header>
 
