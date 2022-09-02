@@ -55,8 +55,8 @@ const style = {
     },
 
     pic: {
-        maxHeight: "50px",
-        maxWidth: "50px"
+        maxHeight: "40px",
+        maxWidth: "40px"
     },
 
     name: {

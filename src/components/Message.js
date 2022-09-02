@@ -57,7 +57,6 @@ const style = {
     },
 
     message: {
-        alignSelf: "flex-end",
         listStyle: "none",
         maxWidth: "75ch",
         wordBreak: "break-all"
