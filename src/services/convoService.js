@@ -2,47 +2,62 @@ import axios from 'axios'
 
 const url = 'http://localhost:8102/api/conversations/'
 
-let headers = null
+let token = null
 
-const setHeaders = (user) => {
-  headers = {
+const setToken = (user) => {
+  token = user
+}
+
+const createHeaders = () => {
+  return {
     headers: {
-      "Authorization": 'bearer ' + user
+      "Authorization": "bearer " + token
     }
   }
 }
 
 const createConversation = (title) => {
-  return axios.post(url, title, headers)
+  return axios.post(url, title, createHeaders())
               .then(response => response.data)
 }
 
 const getConversations = () => {
-    return axios.get(url, headers)
+    return axios.get(url, createHeaders())
                 .then(response => response.data.conversations)
 }
 
-const sendMessage = (message, id) => {
-    return axios.post(url+id, message, headers)
-                .then(response => response.data)
-}
-
 const getMessages = (num, id) => {
+  const headers = createHeaders()
   headers["params"] = {
     "num": num
   }
-  return axios.get(url+id, headers)
+  console.log("getmsg ", headers)
+  return axios.get(url+id, createHeaders())
               .then(response => response.data)
 }
 
 const getMessage = (convoId, msgId) => {
-  return axios.get(url+`${convoId}/${msgId}`, headers)
+  return axios.get(url+`${convoId}/${msgId}`, createHeaders())
               .then(response => response.data)
+}
+
+const sendMessage = (message, id) => {
+    return axios.post(url+id, message, createHeaders())
+                .then(response => response.data)
 }
 
 const deleteMessage = (convoId, msgId) => {
-  return axios.delete(url+`${convoId}/${msgId}`, headers)
+  return axios.delete(url+`${convoId}/${msgId}`, createHeaders())
               .then(response => response.data)
 }
 
-export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage, setHeaders }
+const addReaction = (convoId, msgId, reaction, num) => {
+  const react = { 
+      "emoji": reaction,
+      "num": num
+  }
+  return axios.put(url+`${convoId}/${msgId}`, react, createHeaders())
+              .then(response => response.data)
+}
+
+export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage, addReaction, setToken }

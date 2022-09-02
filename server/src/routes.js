@@ -34,6 +34,9 @@ router.get('/api/conversations/:id/:msgid', messages.getMessage)
 /* DELETE to message URL to delete the message */
 router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 
+/* PUT to message URL to add a reaction to the message */
+router.put('/api/conversations/:id/:msgid', messages.addReaction)
+
 
 
 

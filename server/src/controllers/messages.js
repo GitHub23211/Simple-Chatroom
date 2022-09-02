@@ -14,7 +14,7 @@ const createMessage = async (request, response) => {
 
         if (conversation) {
 
-            const message = new models.Message({creator, conversation: conversation._id, text})
+            const message = new models.Message({creator, conversation: conversation._id, text, reaction: {emoji: "", num: 0}})
             const returned = await message.save()
 
             if (returned) {
@@ -91,9 +91,31 @@ const deleteMessage = async (request, response) => {
 
 }
 
+const addReaction = async (request, response) => {
+
+    const user = await auth.validUser(request)
+
+    if (user) {
+        try{
+        const msgid = request.params.msgid
+        const react = {
+            "emoji": request.body.emoji,
+            "num": request.body.num
+        }
+        await models.Message.findByIdAndUpdate(msgid, {reaction: react})
+        response.json({status: "success", emoji: request.body.emoji})
+    } 
+    catch {request.json({status: "failed something went wrong adding a reaction"})}
+
+    } else {
+        response.json({status: "failed to validate user"})
+    }
+}
+
 module.exports = {
     createMessage, 
     getMessages,
     getMessage, 
-    deleteMessage
+    deleteMessage,
+    addReaction
 }

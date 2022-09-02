@@ -44,6 +44,10 @@ const Conversation = mongoose.model('Conversation', conversationSchema)
 
 const messageSchema = new mongoose.Schema({
     text: String,
+    reaction: {
+      emoji: {type: String},
+      num: {type: Number}
+    },
     timestamp: {type: Date, default: Date.now},
     creator: {type: mongoose.Types.ObjectId, ref: 'Session'},
     conversation: {type: mongoose.Types.ObjectId, ref: 'Conversation'}

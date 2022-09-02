@@ -1,15 +1,17 @@
 import {useState} from 'react'
 import {auth, convoService} from '../services'
+import ReactionList from './ReactionList'
 import pic from '../components/1.png'
 
-function Message ({msg, onClick, user}) {
-    const [button, setButton] = useState(false)
+function Message ({msg, onClick, user, convoId}) {
+    const [buttons, setButtons] = useState(false)
+    const [showReactList, setReactList] = useState(false)
 
-    const showButton = () => {
+    const showMessageOpts = () => {
         auth.getUser(user)
             .then(response => {
                 if(response.username === msg.creator) {
-                    setButton(!button)
+                    setButtons(!buttons)
                     }
                 })
     }
@@ -19,21 +21,24 @@ function Message ({msg, onClick, user}) {
 
             <div style={style.contents}>
                 <img style={style.avatar} src={pic} alt="user profile picture"/>
-
                 <div style={style.creator}><strong>{msg.creator}</strong></div>
             </div>
 
-            <li className="msg" style={style.message} data-id={msg.id} onClick={showButton}>
+            <li className="msg" style={style.message} data-id={msg.id} onClick={showMessageOpts}>
                     {msg.text}
             </li>
 
-            {button ? 
-            <>
-                <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
-                <button style={style.button} onClick={() => onClick(msg.id)}>React</button>
-            </> : <></>}
-
-
+            <div>
+                {buttons ? 
+                <>
+                    <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
+                    <button style={style.button} onClick={() => {setButtons(false); setReactList(!showReactList)}}>React</button>
+                </> : <></>}
+            </div>
+            
+            <div>
+                {showReactList ? <ReactionList convoId={convoId} msgId={msg.id}/> : <></>}
+            </div>
         </div>
     )
 }

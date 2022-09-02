@@ -15,7 +15,7 @@ function App() {
     }
   }
   
-  convoService.setHeaders(user)
+  convoService.setToken(user)
 
   useEffect(checkForUser, [])
 
