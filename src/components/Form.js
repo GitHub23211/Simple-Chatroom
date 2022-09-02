@@ -39,14 +39,28 @@ function Form ({toRegister, setUser}) {
     const registerNewUser = (event) => {
         event.preventDefault()
         auth.registerUser(createUserInfo())
-        .then(response => response.token ? setUser(response.token) : console.log(response))
+            .then(response => {
+                try {
+                    setUser(response.token)
+                } 
+                catch {
+                    console.log(response)
+                }
+            })
     }
 
     const loginUser = (event) => {
         event.preventDefault()
         auth.loginUser(createUserInfo())
-            .then(response => response.token ? setUser(response.token) : console.log(response))
-
+            .then(response => {
+                try {
+                    setUser(response.token)
+                    localStorage.setItem('user', response.token)
+                }
+                catch {
+                    console.log(response)
+                }
+            })
     }
 
     const onSubmit = toRegister ? registerNewUser : loginUser

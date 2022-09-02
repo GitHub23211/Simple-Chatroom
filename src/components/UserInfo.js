@@ -4,21 +4,20 @@ import {auth} from '../services'
 
 function UserInfo({user, setUser}) {
     const [username, setUsername] = useState("")
+    const navigate = useNavigate()
+
     const setName = () => {
         console.log(user)
-        auth.getUser(user).then(response => {console.log(response); setUsername(response.username)})
+        auth.getUser(user).then(response => setUsername(response.username))
     }
-
-    const navigate = useNavigate()
 
     const logoutUser = () => {
         setUser(null)
+        localStorage.clear()
         navigate('/')
     }
 
-
     useEffect(setName, [])
-    console.log("user is ", username)
 
     return(
         <div>

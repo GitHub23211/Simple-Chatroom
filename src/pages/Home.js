@@ -6,7 +6,7 @@ function Home({toRegister, user, setUser}) {
         <div style={style.container} className="container">
           <h1 style={style.text}> {toRegister ? "Register for Free!" : "Welcome Back!"} </h1>
           <div>
-              <Form toRegister={toRegister} setUser={setUser}/>
+              <Form toRegister={toRegister} setUser={setUser} user={user}/>
           </div>
       </div>
     )

@@ -1,12 +1,23 @@
 import { ConversationList, UserInfo } from './components'
 import { Home, Conversation } from './pages'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import { convoService } from './services'
 
 function App() {
   const [user, setUser] = useState(null)
+
+  const checkForUser = () => {
+    const user = localStorage.getItem('user')
+    if(user) {
+      console.log("user is logged in: ", user)
+      setUser(user)
+    }
+  }
+  
   convoService.setHeaders(user)
+
+  useEffect(checkForUser, [])
 
   return (
     <Router>
@@ -14,8 +25,8 @@ function App() {
           <div style={style.logo}>CHAT</div>
             <div className="nav-menu" style={style.menu}>
               <Link style={style.link} to="/">Home</Link>
-              <Link style={style.link} to="/conversations">Conversations</Link>
-              {user ? <UserInfo style={style.link} user={user} setUser={setUser}/> : <></>}
+              {user ? <><Link style={style.link} to="/conversations">Conversations</Link>
+              <UserInfo style={style.link} user={user} setUser={setUser}/> </>: <></>}
             </div>
         </header>
 
