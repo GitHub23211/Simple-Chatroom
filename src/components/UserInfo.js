@@ -26,12 +26,8 @@ function UserInfo({user, setUser}) {
                 <img style={style.pic} src={pic} alt="user profile picture"/>
             </div>
 
-            <div style={style.name}>
-                <div>{username}</div>
-            </div>
-        
             <div style={style.profile}>
-                <Link to="/profile">Profile</Link>
+                <Link to="/profile">{username}</Link>
             </div>
 
             <div style={style.logout}>
@@ -57,10 +53,6 @@ const style = {
     pic: {
         maxHeight: "40px",
         maxWidth: "40px"
-    },
-
-    name: {
-        flexGrow: 1
     },
 
     profile: {
