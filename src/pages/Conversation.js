@@ -33,7 +33,7 @@ function Conversation({user}) {
                 "text": event.target[0].value
               }
               convoService.sendMessage(message, currentConvo)
-              .then(response => {getMessages()})
+              .then(response => getMessages())
         }
     }
 
@@ -48,31 +48,29 @@ function Conversation({user}) {
 
     useEffect(getMessages, [currentConvo])
     useEffect(autoScrollDown, [myMsgs])
-    
+
     return(
-        <div>
-            <div style={style.layout}>
+        <div style={style.layout}>
 
-                <div style={style.list}>
-                    <ConversationList />
-                </div>
+            <div style={style.list}>
+                <ConversationList />
+            </div>
 
-                <div style={style.chat}>            
-                    <div style={style.convo}>
-                        <div style={style.convoName}>
-                            <h5><strong>#{convoName}</strong></h5>
-                        </div>
-                        <div id="chat" style={style.messages} >
-                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} scrollDown={autoScrollDown}/>)}
-                        </div>
+            <div style={style.chat}>            
+                <div style={style.convo}>
+                    <div style={style.convoName}>
+                        <h5><strong>#{convoName}</strong></h5>
+                    </div>
+                    <div id="chat" style={style.messages} >
+                        {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} scrollDown={autoScrollDown}/>)}
+                    </div>
 
-                        <div style={style.input}>
-                            <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message #${convoName}`}/>
-                        </div>
+                    <div style={style.input}>
+                        <SendMsg sendMsg={sendMessage} currMsg={currentMsg} onChange={onChangeCurrentMsg} placeholder={`Message #${convoName}`}/>
                     </div>
                 </div>
-
             </div>
+
         </div>
     )
 }

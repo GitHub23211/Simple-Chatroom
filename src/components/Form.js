@@ -95,8 +95,6 @@ function Form ({toRegister, setUser}) {
 
     const onSubmit = toRegister ? (event) => createSession(event, auth.registerUser) : (event) => createSession(event, auth.loginUser)
     const buttonText = toRegister ? newUser() : oldUser()
-
-    console.log("reloaded component")
     
     return (
         <form style={style.form} onSubmit={onSubmit}>
