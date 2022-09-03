@@ -1,9 +1,14 @@
 import { convoService } from "../services"
 
-function Reaction({emoji, convoId, msgId}) {
+function Reaction({emoji, convoId, msgId, setReactList}) {
+
+    const onReact = (event) => {
+        convoService.addReaction(convoId, msgId, event.target.innerHTML, 1)
+                    .then(response => setReactList(false))
+    }
     
     return (
-        <span onClick={e => convoService.addReaction(convoId, msgId, e.target.innerHTML, 1).then(response => {console.log(response)})}>
+        <span onClick={onReact}>
             {emoji}
         </span>
     )

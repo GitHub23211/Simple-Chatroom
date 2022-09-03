@@ -12,12 +12,15 @@ function ConversationList({}) {
         "title": event.target[0].value.toLowerCase()
       }
       convoService.createConversation(payload)
-                  .then(response => {setNewConvoName(""); getConversations()})
+                  .then(response => {
+                    setNewConvoName("") 
+                    getConversations()
+                })
     }
   
     const getConversations = () => {
         convoService.getConversations()
-          .then(response => {console.log(response); setMyConvos(response)})
+          .then(response => setMyConvos(response))
     }
 
     useEffect(getConversations, [])
@@ -25,7 +28,7 @@ function ConversationList({}) {
     return(
         <div className="container" style={style.container}>
             <form onSubmit={createConversation}>
-                <input type="text" className="u-full-width" placeholder="Conversation Name..." value={newConvoName} onChange={e => setNewConvoName(e.target.value)}></input>
+                <input type="text" className="u-full-width" placeholder="Conversation Title" value={newConvoName} onChange={e => setNewConvoName(e.target.value)}></input>
                 <button className="u-full-width">
                     Create
                 </button>
@@ -50,10 +53,6 @@ const style = {
 
     convoName: {
         listStyle: 'none',
-    },
-   
-    title: {
-        // textAlign: "center"
     },
 
     list: {

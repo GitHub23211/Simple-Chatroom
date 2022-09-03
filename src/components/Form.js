@@ -57,15 +57,17 @@ function Form ({toRegister, setUser}) {
 
     return (
         <form style={style.form} onSubmit={onSubmit}>
-                <div >
-                    <label style={style.label} htmlFor ="username">Username</label>
-                    <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
-                </div>
+            
+            <div >
+                <label style={style.label} htmlFor ="username">Username</label>
+                <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
+            </div>
 
             <div >
-                    <label style={style.label} htmlFor ="passwrod">Password</label>
-                    <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
-                </div>
+                <label style={style.label} htmlFor ="passwrod">Password</label>
+                <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
+            </div>
+
             {buttonText}
         </form>
     )

@@ -50,7 +50,7 @@ function Conversation({user}) {
                 <div style={style.chat}>
                     <div style={style.convo}>
                         <div className="msgList" style={style.messages} >
-                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} onClick={deleteMessage}/>)}
+                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} getMessages={getMessages}/>)}
                         </div>
 
                         <div style={style.input}>

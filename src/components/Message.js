@@ -1,9 +1,9 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
 import pic from '../components/1.png'
 
-function Message ({msg, onClick, user}) {
+function Message ({msg, user, delMessage, getMessages}) {
     const [buttons, setButtons] = useState(false)
     const [showReactList, setReactList] = useState(false)
 
@@ -12,9 +12,11 @@ function Message ({msg, onClick, user}) {
             .then(response => {
                 if(response.username === msg.creator) {
                     setButtons(!buttons)
-                    }
-                })
+                }
+            })
     }
+
+    useEffect(getMessages, [showReactList])
 
     return(
         <div>
@@ -31,7 +33,7 @@ function Message ({msg, onClick, user}) {
             <div>
                 {buttons ? 
                 <>
-                    <button style={style.button} onClick={() => onClick(msg.id)}>Delete</button> 
+                    <button style={style.button} onClick={() => delMessage(msg.id)}>Delete</button> 
                     <button style={style.button} onClick={() => {setButtons(false); setReactList(!showReactList)}}>React</button>
                 </> : <></>}
             </div>
@@ -41,7 +43,7 @@ function Message ({msg, onClick, user}) {
             </div>
             
             <div>
-                {showReactList ? <ReactionList msgId={msg.id}/> : <></>}
+                {showReactList ? <ReactionList msgId={msg.id} setReactList={setReactList} /> : <></>}
             </div>
         </div>
     )

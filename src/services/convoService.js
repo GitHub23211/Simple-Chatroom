@@ -31,7 +31,6 @@ const getMessages = (num, id) => {
   headers["params"] = {
     "num": num
   }
-  console.log("getmsg ", headers)
   return axios.get(url+id, createHeaders())
               .then(response => response.data)
 }

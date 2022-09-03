@@ -28,7 +28,6 @@ function App() {
           </div>
 
           <div style={style.menu}>
-            <Link style={style.link} to="/">Home</Link>
             {user ? <Link style={style.link} to="/conversations">Conversations</Link> : <></>}
           </div>
 
