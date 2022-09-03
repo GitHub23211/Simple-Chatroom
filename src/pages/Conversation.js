@@ -33,11 +33,10 @@ function Conversation({user}) {
                 "text": event.target[0].value
               }
               convoService.sendMessage(message, currentConvo)
-              .then(response => {getMessages()})
+              .then(response => {getMessages(); autoScrollDown()})
         }
     }
 
-    
     const onChangeCurrentMsg = (event) => {
       setCurrentMsg(event.target.value)
     }
@@ -52,9 +51,12 @@ function Conversation({user}) {
                     <ConversationList />
                 </div>
 
-                <div style={style.chat}>
+                <div style={style.chat}>            
                     <div style={style.convo}>
-                        <div style={style.messages} >
+                        <div style={style.convoName}>
+                            <h5><strong>#{convoName}</strong></h5>
+                        </div>
+                        <div id="chat" style={style.messages} >
                             {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage}/>)}
                         </div>
 
@@ -87,19 +89,26 @@ const style = {
         gridTemplateColumns: "5fr"
     },
 
-    messages: {
+    convoName: {
         gridColumn: 1,
         gridRow: 1,
+        marginTop: "5px",
+        marginLeft: "2%",
+        borderRadius: "1rem"
+    },
+
+    messages: {
+        gridColumn: 1,
+        gridRow: 2,
         height: "70vh",
         marginBottom: "2rem",
-        marginTop: "1rem",
         marginLeft: "3%",
         overflow: "auto"
     },
 
     input: {
         gridColumn: 1,
-        gridRow: 2,
+        gridRow: 3,
         width: "65.333333%",
         marginLeft: "3%"
     }
