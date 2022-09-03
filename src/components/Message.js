@@ -3,7 +3,7 @@ import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
 import pic from '../components/1.png'
 
-function Message ({msg, user, delMessage, getMessages}) {
+function Message ({msg, user, delMessage}) {
     const [delButton, setDelButton] = useState(false)
     const [reactButton, setReactButton] = useState(false)
     const [showReactList, setReactList] = useState(false)
@@ -18,8 +18,6 @@ function Message ({msg, user, delMessage, getMessages}) {
                 setReactList(false)
             })
     }
-
-    useEffect(getMessages, [showReactList])
 
     return(
         <div>

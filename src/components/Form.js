@@ -25,15 +25,33 @@ function oldUser() {
     )
 }
 
+function invalidCredWarning() {
+    return (
+        <div>
+            Invalid username or password!
+        </div>
+    )
+}
+
 function Form ({toRegister, setUser}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [invalidCred, setFlag] = useState(false)
+
     const navigate = useNavigate()
 
     const createUserInfo = () => {
-        return {
-            username: username,
-            password: password
+        const name = username
+        const pass = password
+        if(name === "" || password === "") {
+            setFlag(true)
+        }
+        else {
+            setFlag(false)
+            return {
+                username: username,
+                password: password
+            }
         }
     }
 
@@ -57,6 +75,8 @@ function Form ({toRegister, setUser}) {
 
     return (
         <form style={style.form} onSubmit={onSubmit}>
+
+            {invalidCred ? invalidCredWarning() : <></>}
             
             <div >
                 <label style={style.label} htmlFor ="username">Username</label>

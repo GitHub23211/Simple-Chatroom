@@ -7,11 +7,12 @@ Conversations are laid out similarly to Discord, with the senders name and avata
 
 ## Frontend Extensions
 * Added support for querying a limited number of messages at once
-* Added ability to delete and react to messages.
-    * User clicks on a message and if it is their message, a delete and react button will show up under it.
+* Added ability to delete messages.
+    * User clicks on a message and if it is their message, a delete button will show up under it.
 * Added a logout button that logs out user and redirects them to landing page.
+* Logging in or successfully registering now redirects the user to the Conversations list.
 * Added persistent log ins so that user is not logged out if they refresh the page.
-* Added the ability for users to react to their own and other messages from a list of 15 emojis.
+* Added the ability for users to react to their own and other messages with an emoji chosen from a list of 15 emojis.
     * Emojis are rendered under the message a user reacts to.
 
 ## Backend Extensions
@@ -21,3 +22,4 @@ Conversations are laid out similarly to Discord, with the senders name and avata
 * Updated Authorization process to use JWTs instead of the userID.
     * Created a secret phrase in the .env to store the validation token for JWT encryption/decryption.
 * Modified getMessages function in .../controllers/messagse.js to also return information about the current conversation room.
+* Modified Message schema to hold a "reaction" object that stores a String for the emoji and an Int to store the number of times that emoji has been selected.
