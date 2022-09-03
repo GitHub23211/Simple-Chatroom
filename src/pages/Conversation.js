@@ -26,11 +26,12 @@ function Conversation({user}) {
 
     const sendMessage = (event) => {
         event.preventDefault()
+        setCurrentMsg("")
         const message = {
           "text": event.target[0].value
         }
         convoService.sendMessage(message, currentConvo)
-        .then(response => {setCurrentMsg(""); getMessages()})
+        .then(response => {getMessages()})
     }
 
     
