@@ -1,5 +1,5 @@
 import { ConversationList, UserInfo } from './components'
-import { Home, Conversation } from './pages'
+import { Home, Conversation, Profile } from './pages'
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import { convoService } from './services'
@@ -39,6 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home toRegister={false} user={user} setUser={setUser}/>}/>
           <Route path="/register" element={<Home toRegister={true} user={user} setUser={setUser}/>}/>
+          <Route path="/profile" element={<Profile user={user}/>}/>
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation user={user}/>}/>
         </Routes>

@@ -8,6 +8,7 @@ const cors = require('cors')
 
 const router = require('./routes')
 const config = require('./config')
+const imgstore = require('./imgstore')
 
 
 function errorNotification (err, str, req) {
@@ -32,9 +33,8 @@ if (process.env.NODE_ENV === 'development') {
     app.use(errorhandler({ log: errorNotification }))
   }
 app.use(cookieParser(config.sessionSecret))
-
+app.use(imgstore.upload.single("image"))
 app.use('/', router)
-
 
 
 module.exports = app

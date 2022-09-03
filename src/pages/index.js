@@ -1,4 +1,5 @@
 import Home from './Home'
 import Conversation from './Conversation'
+import Profile from './Profile'
 
-export {Home, Conversation}
+export {Home, Conversation, Profile}
