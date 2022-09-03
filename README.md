@@ -3,7 +3,7 @@
 ## Application Description
 A simple chatroom application that mimicks other widely used applications such as Discord and Messenger. Users simply sign up with a username and password. After successfully registering or signing in, users are shown links to available Conversations and their profiles as well as a logout button.
 
-Conversations are laid out similarly to discord, with the senders name and avatar shown above their message. Users can click on messages they have sent to show buttons to delete the message or react to the message. Clicking on messages sent by others does nothing.
+Conversations are laid out similarly to Discord, with the senders name and avatar shown above their message. Users can click on messages they have sent to show buttons to delete the message or react to the message. Clicking on messages sent by others only shows the react button.
 
 ## Frontend Extensions
 * Added support for querying a limited number of messages at once
