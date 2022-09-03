@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:8102/api/conversations/'
+const url = '/api/conversations/'
 
 let token = null
 

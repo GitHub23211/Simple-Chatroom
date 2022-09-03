@@ -39,6 +39,7 @@ function Conversation({user}) {
     }
 
     useEffect(getMessages, [currentConvo])
+    
     return(
         <div>
             <div style={style.layout}>
