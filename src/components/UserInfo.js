@@ -8,7 +8,6 @@ function UserInfo({user, setUser}) {
     const navigate = useNavigate()
 
     const setName = () => {
-        console.log(user)
         auth.getUser(user).then(response => setUsername(response.username))
     }
 

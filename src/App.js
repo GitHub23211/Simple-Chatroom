@@ -10,7 +10,6 @@ function App() {
   const checkForUser = () => {
     const user = localStorage.getItem('user')
     if(user) {
-      console.log("user is logged in: ", user)
       setUser(user)
     }
   }

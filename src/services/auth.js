@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:8102/auth/'
+const url = '/auth/'
 
 const getUser = (user) => {
   const headers = {
