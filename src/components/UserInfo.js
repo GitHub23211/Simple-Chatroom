@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import {auth} from '../services'
-import pic from './1.png'
+import pic from './placeholder_avatar.png'
 
 function UserInfo({user, setUser}) {
     const [username, setUsername] = useState("")

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
-import pic from '../components/1.png'
+import pic from '../components/placeholder_avatar.png'
 
 function Message ({msg, user, delMessage}) {
     const [delButton, setDelButton] = useState(false)
@@ -80,8 +80,6 @@ const style = {
     button: {
         marginTop: "1rem"
     },
-
-
 }
 
 
