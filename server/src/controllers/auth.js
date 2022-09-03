@@ -23,7 +23,8 @@ const createSession = async (request, response) => {
 
     const session = new models.Session({
         username: request.body.username,
-        password: password
+        password: password,
+        avatar: "dummy URL"
     })
 
     const returned = await session.save()
@@ -53,7 +54,8 @@ const getUser = async (request, response) => {
                     response.json({
                         status: "success",
                         id: match._id,
-                        username: match.username
+                        username: match.username,
+                        avatar: match.avatar
                     })       
                 }
         } catch {response.json({stauts: "missing or invalid token"})}
