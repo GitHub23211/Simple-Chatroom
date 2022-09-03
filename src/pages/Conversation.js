@@ -33,7 +33,7 @@ function Conversation({user}) {
                 "text": event.target[0].value
               }
               convoService.sendMessage(message, currentConvo)
-              .then(response => {getMessages(); autoScrollDown()})
+              .then(response => {getMessages()})
         }
     }
 
@@ -41,7 +41,13 @@ function Conversation({user}) {
       setCurrentMsg(event.target.value)
     }
 
+    const autoScrollDown = () => {
+        const elem = document.getElementById("chat")
+        elem.scrollTop = elem.scrollHeight
+    }
+
     useEffect(getMessages, [currentConvo])
+    useEffect(autoScrollDown, [myMsgs])
     
     return(
         <div>
