@@ -47,6 +47,12 @@ function Conversation({user}) {
 
     useEffect(getMessages, [currentConvo])
     useEffect(autoScrollDown, [myMsgs])
+    useEffect(() => {
+        const interval = setInterval(() => {
+            getMessages()
+        }, 1000)
+        return () => clearInterval(interval)
+    }, [myMsgs])
 
     return(
         <div style={style.layout}>
