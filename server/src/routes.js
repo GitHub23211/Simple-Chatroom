@@ -39,7 +39,7 @@ router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 router.put('/api/conversations/:id/:msgid', messages.addReaction)
 
 /* PUT to user profile to upload a picture as their avatar */
-router.put('/api/avatar', upload.uploadAvatar)
+router.put('/api/:userid/avatar', upload.uploadAvatar)
 
 
 

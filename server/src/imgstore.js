@@ -11,6 +11,4 @@ const imageStorageEngine = multer.diskStorage({
 
 const upload = multer({storage: imageStorageEngine})
 
-
-
 module.exports = {upload}
