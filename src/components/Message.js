@@ -15,6 +15,7 @@ function Message ({msg, user, delMessage, getMessages}) {
                     setDelButton(!delButton)
                 }
                 setReactButton(!reactButton)
+                setReactList(false)
             })
     }
 
@@ -22,33 +23,35 @@ function Message ({msg, user, delMessage, getMessages}) {
 
     return(
         <div>
+            <div style={style.container}>
+                <div style={style.contents}>
+                    <img style={style.avatar} src={pic} alt="user profile picture"/>
+                    <span style={style.creator}><strong>{msg.creator}</strong></span>
+                </div>
 
-            <div style={style.contents}>
-                <img style={style.avatar} src={pic} alt="user profile picture"/>
-                <span style={style.creator}><strong>{msg.creator}</strong></span>
-            </div>
+                <li style={style.message} data-id={msg.id} onClick={showMessageOpts}>
+                        {msg.text}
+                </li>
 
-            <li className="msg" style={style.message} data-id={msg.id} onClick={showMessageOpts}>
-                    {msg.text}
-            </li>
+                <div style={style.reaction}>
+                    {msg.reaction.emoji}
+                </div>
+            </div>
+ 
+            {delButton ? <button style={style.button} onClick={() => delMessage(msg.id)}>Delete</button> : <></>}
+            {reactButton ? <button style={style.button} onClick={() => {setReactButton(false); setDelButton(false); setReactList(!showReactList)}}>React</button> : <></>}
 
-            <div>
-                {delButton ? <button style={style.button} onClick={() => delMessage(msg.id)}>Delete</button> : <></>}
-                {reactButton ? <button style={style.button} onClick={() => {setReactButton(false); setDelButton(false); setReactList(!showReactList)}}>React</button> : <></>}
-            </div>
-
-            <div>
-                {msg.reaction.emoji}
-            </div>
-            
-            <div>
-                {showReactList ? <ReactionList msgId={msg.id} setReactList={setReactList} /> : <></>}
-            </div>
+            {showReactList ? <ReactionList msgId={msg.id} setReactList={setReactList} /> : <></>}
         </div>
     )
 }
 
 const style = {
+
+    container: {
+        paddingTop: "2rem"
+    },
+
     contents: {
         display: "flex",
         width: "65%",
@@ -72,13 +75,15 @@ const style = {
         wordBreak: "break-all"
     },
 
-    button: {
-        marginTop: "-1%"
+    reaction: {
+        marginTop: "-1rem",
     },
 
-    reaction: {
+    button: {
+        marginTop: "1rem"
+    },
 
-    }
+
 }
 
 

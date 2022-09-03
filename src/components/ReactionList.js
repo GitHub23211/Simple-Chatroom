@@ -11,19 +11,31 @@ function ReactionList({msgId, setReactList}) {
 
     const renderEmojis = (start, end) => {
         return(
-            <div>
+            <div style={style.listRow}>
                 {emojis.slice(start, end).map(e => <Reaction key={emojis.indexOf(e)} emoji={e} convoId={convoId} msgId={msgId} setReactList={setReactList} />)}
             </div>
         )
     }
     
     return (
-        <div>
+        <div style={style.reactList}>
             {renderEmojis(0, 5)}
             {renderEmojis(5, 10)}
             {renderEmojis(10, 15)}
         </div>
     )
+}
+
+const style = {
+    reactList: {
+        display: "inline-block",
+        marginTop: "1rem"
+    },
+
+    listRow: {
+        display: "flex",
+        alignItems: "center"
+    }
 }
 
 export default ReactionList
