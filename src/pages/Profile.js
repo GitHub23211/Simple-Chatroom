@@ -17,8 +17,11 @@ function Profile({user}) {
                 <div style={style.picContainer}>
                     <img style={style.pic} src={pic} alt="user profile picture"/>
                 </div>
-                <span style={style.name}><h1>{userInfo.username}</h1></span>
 
+                <div style={style.top}>
+                    <span style={style.name}><h1>{userInfo.username}</h1></span>
+                    <button style={style.edit}>Edit User Profile</button>
+                </div>
 
                 <form>
                     <div className="row">
@@ -78,8 +81,20 @@ const style = {
         marginTop: "1rem"
     },
 
-    name: {
+    top: {
+        display: "flex",
+        flexWrap: "wrap"
     },
+
+    name: {
+        flexGrow: 5
+    },
+
+    edit: {
+        flexGrow: 1,
+        marginTop: "2rem"
+    },
+
 
     picContainer: {
     },
