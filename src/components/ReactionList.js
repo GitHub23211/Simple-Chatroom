@@ -10,7 +10,7 @@ function ReactionList({msgId}) {
     ]
     
     return (
-        <>
+        <div>
             <div>
                 {emojis.slice(0, 5).map(e => <Reaction convoId={convoId} msgId={msgId} key={emojis.indexOf(e)} emoji={e}/>)}
             </div>
@@ -22,7 +22,7 @@ function ReactionList({msgId}) {
             <div>
                 {emojis.slice(10, 15).map(e => <Reaction convoId={convoId} msgId={msgId} key={emojis.indexOf(e)} emoji={e}/>)}
             </div>
-        </>
+        </div>
     )
 }
 

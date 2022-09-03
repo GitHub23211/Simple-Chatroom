@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {auth} from '../services'
 
 function newUser() {
@@ -28,6 +28,7 @@ function oldUser() {
 function Form ({toRegister, setUser}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     const createUserInfo = () => {
         return {
@@ -36,12 +37,14 @@ function Form ({toRegister, setUser}) {
         }
     }
 
-    const registerNewUser = (event) => {
+    const createSession = (event, func) => {
         event.preventDefault()
-        auth.registerUser(createUserInfo())
+        func(createUserInfo())
             .then(response => {
                 try {
                     setUser(response.token)
+                    localStorage.setItem('user', response.token)
+                    navigate('/conversations')
                 } 
                 catch {
                     console.log(response)
@@ -49,21 +52,7 @@ function Form ({toRegister, setUser}) {
             })
     }
 
-    const loginUser = (event) => {
-        event.preventDefault()
-        auth.loginUser(createUserInfo())
-            .then(response => {
-                try {
-                    setUser(response.token)
-                    localStorage.setItem('user', response.token)
-                }
-                catch {
-                    console.log(response)
-                }
-            })
-    }
-
-    const onSubmit = toRegister ? registerNewUser : loginUser
+    const onSubmit = toRegister ? (event) => createSession(event, auth.registerUser) : (event) => createSession(event, auth.loginUser)
     const buttonText = toRegister ? newUser() : oldUser()
 
     return (

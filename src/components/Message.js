@@ -21,7 +21,7 @@ function Message ({msg, onClick, user}) {
 
             <div style={style.contents}>
                 <img style={style.avatar} src={pic} alt="user profile picture"/>
-                <div style={style.creator}><strong>{msg.creator}</strong></div>
+                <span style={style.creator}><strong>{msg.creator}</strong></span>
             </div>
 
             <li className="msg" style={style.message} data-id={msg.id} onClick={showMessageOpts}>
