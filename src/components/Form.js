@@ -5,9 +5,7 @@ import {auth} from '../services'
 function newUser() {
     return (
         <div>
-            <button style={style.input} className="button button-primary" type="submit">
-                Register
-            </button>
+            <input style={style.input} className="button button-primary" type="submit" value="Register"/>
             <p>Already have an account? <Link to="/">Log in</Link></p> 
         </div>
     )
@@ -16,10 +14,7 @@ function newUser() {
 function oldUser() {
     return (
         <div>
-            <button style={style.input} className="button button-primary" type="submit">
-                Log In
-            </button>
-
+            <input style={style.input} className="button button-primary" type="submit" value="Log In"/>
             <p>Need an account? <Link to="/register">Register</Link></p> 
         </div>
     )
@@ -103,12 +98,12 @@ function Form ({toRegister, setUser}) {
             
             <div >
                 <label style={style.label} htmlFor ="username">Username</label>
-                <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => updateInputField(event, setUsername)}></input>
+                <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => updateInputField(event, setUsername)}/>
             </div>
 
             <div >
                 <label style={style.label} htmlFor ="passwrod">Password</label>
-                <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => updateInputField(event, setPassword)}></input>
+                <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => updateInputField(event, setPassword)}/>
             </div>
 
             {buttonText}
@@ -125,7 +120,8 @@ const style = {
     input: {
         width: "50%",
         marginRight: "25%",
-        marginLeft: "25%"
+        marginLeft: "25%",
+        marginBottom: "2%"
     },
 
     form: {
