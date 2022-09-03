@@ -11,6 +11,8 @@ Conversations are laid out similarly to discord, with the senders name and avata
     * User clicks on a message and if it is their message, a delete and react button will show up under it.
 * Added a logout button that logs out user and redirects them to landing page.
 * Added persistent log ins so that user is not logged out if they refresh the page.
+* Added the ability for users to react to their own and other messages from a list of 15 emojis.
+    * Emojis are rendered under the message a user reacts to.
 
 ## Backend Extensions
 * Modified Session schema so that it accepts passwords submitted by users.

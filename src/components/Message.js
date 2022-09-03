@@ -4,15 +4,17 @@ import ReactionList from './ReactionList'
 import pic from '../components/1.png'
 
 function Message ({msg, user, delMessage, getMessages}) {
-    const [buttons, setButtons] = useState(false)
+    const [delButton, setDelButton] = useState(false)
+    const [reactButton, setReactButton] = useState(false)
     const [showReactList, setReactList] = useState(false)
 
     const showMessageOpts = () => {
         auth.getUser(user)
             .then(response => {
                 if(response.username === msg.creator) {
-                    setButtons(!buttons)
+                    setDelButton(!delButton)
                 }
+                setReactButton(!reactButton)
             })
     }
 
@@ -31,11 +33,8 @@ function Message ({msg, user, delMessage, getMessages}) {
             </li>
 
             <div>
-                {buttons ? 
-                <>
-                    <button style={style.button} onClick={() => delMessage(msg.id)}>Delete</button> 
-                    <button style={style.button} onClick={() => {setButtons(false); setReactList(!showReactList)}}>React</button>
-                </> : <></>}
+                {delButton ? <button style={style.button} onClick={() => delMessage(msg.id)}>Delete</button> : <></>}
+                {reactButton ? <button style={style.button} onClick={() => {setReactButton(false); setDelButton(false); setReactList(!showReactList)}}>React</button> : <></>}
             </div>
 
             <div>
