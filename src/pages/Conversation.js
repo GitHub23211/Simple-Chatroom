@@ -13,7 +13,6 @@ function Conversation({user}) {
     const getMessages = () => {
         convoService.getMessages(20, currentConvo)
                   .then(response => {
-                    console.log("getting msgs")
                     setConvoName(response.convo.title)
                     setMyMsgs(response.messages.reverse())
                 })

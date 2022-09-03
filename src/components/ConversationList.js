@@ -19,7 +19,6 @@ function ConversationList({}) {
     }
   
     const getConversations = () => {
-        console.log("getting convos")
         convoService.getConversations()
           .then(response => setMyConvos(response))
     }
