@@ -81,7 +81,7 @@ const validUser = async (request) => {
                 return match._id
             }
         }
-        catch {response.json({stauts: "missing or invalid token"})}
+        catch {response.json({status: "missing or invalid token"})}
     }
     return false
 }
@@ -89,7 +89,7 @@ const validUser = async (request) => {
 /* 
  * loginUser - Checks if the username and password in the request
  *   parameter contains a valid user.
- *   return the user's token if match, else send a 401 error.
+ *   return the user's token if match, else send an error.
 */
 const loginUser = async (request, response) => {
     const username = request.body.username
@@ -98,14 +98,14 @@ const loginUser = async (request, response) => {
     const match = await models.Session.findOne({username: username})
 
     if(!match) {
-        return response.status(401).json({error: "invalid username or password"})
+        return response.json({status: "invalid username or password"})
     }
 
     if(await bcrypt.compare(password, match.password)) {
         const token = encodeToken(match._id, match.username)
         return response.status(200).json({status: "success", token: token})
     }
-    return response.status(401).json({error: "invalid username or password"})
+    return response.json({status: "invalid username or password"})
 }
 
 module.exports = { validUser, getUser, createSession, loginUser }

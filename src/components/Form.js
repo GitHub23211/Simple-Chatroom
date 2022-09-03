@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {Link, useNavigate} from "react-router-dom"
 import {auth} from '../services'
 
@@ -40,14 +40,17 @@ function Form ({toRegister, setUser}) {
 
     const navigate = useNavigate()
 
+    const clearFields = () => {
+        setUsername("")
+        setPassword("")
+        setFlag(false)
+    }
+
     const createUserInfo = () => {
-        const name = username
-        const pass = password
-        if(name === "" || password === "") {
-            setFlag(true)
+        if(username === "" || password === "") {
+            return null
         }
         else {
-            setFlag(false)
             return {
                 username: username,
                 password: password
@@ -55,14 +58,17 @@ function Form ({toRegister, setUser}) {
         }
     }
 
-    const createSession = (event, func) => {
+    const sendUserInfo = (event, userInfo, func) => {
         event.preventDefault()
-        func(createUserInfo())
+        func(userInfo)
             .then(response => {
                 try {
-                    setUser(response.token)
-                    localStorage.setItem('user', response.token)
-                    navigate('/conversations')
+                    if(response.token) {
+                        setUser(response.token)
+                        localStorage.setItem('user', response.token)
+                        navigate('/conversations')
+                    }
+                    setFlag(true)
                 } 
                 catch {
                     console.log(response)
@@ -70,9 +76,28 @@ function Form ({toRegister, setUser}) {
             })
     }
 
+    const createSession = (event, func) => {
+        event.preventDefault()
+        const userInfo = createUserInfo()
+        if(userInfo) {
+            setFlag(false)
+            sendUserInfo(event, userInfo, func)
+        }
+        else {
+            setFlag(true)
+        }
+    }
+
+    const updateInputField = (event, func) => {
+        func(event.target.value)
+        setFlag(false)
+    }
+
     const onSubmit = toRegister ? (event) => createSession(event, auth.registerUser) : (event) => createSession(event, auth.loginUser)
     const buttonText = toRegister ? newUser() : oldUser()
 
+    console.log("reloaded component")
+    
     return (
         <form style={style.form} onSubmit={onSubmit}>
 
@@ -80,12 +105,12 @@ function Form ({toRegister, setUser}) {
             
             <div >
                 <label style={style.label} htmlFor ="username">Username</label>
-                <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => setUsername(event.target.value)}></input>
+                <input  style={style.input} className="u-full-width" id="username" type="text" onChange={event => updateInputField(event, setUsername)}></input>
             </div>
 
             <div >
                 <label style={style.label} htmlFor ="passwrod">Password</label>
-                <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => setPassword(event.target.value)}></input>
+                <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => updateInputField(event, setPassword)}></input>
             </div>
 
             {buttonText}

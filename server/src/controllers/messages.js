@@ -91,6 +91,11 @@ const deleteMessage = async (request, response) => {
 
 }
 
+/* 
+ * addReaction - Creates a reaction object
+ *   and updates the targetted message's reaction field in the database
+ *   return the sent emoji if successful, else send an error.
+*/
 const addReaction = async (request, response) => {
 
     const user = await auth.validUser(request)
@@ -98,11 +103,11 @@ const addReaction = async (request, response) => {
     if (user) {
         try{
         const msgid = request.params.msgid
-        const react = {
+        const reaction = {
             "emoji": request.body.emoji,
             "num": request.body.num
         }
-        await models.Message.findByIdAndUpdate(msgid, {reaction: react})
+        await models.Message.findByIdAndUpdate(msgid, {reaction: reaction})
         response.json({status: "success", emoji: request.body.emoji})
     } 
     catch {request.json({status: "failed something went wrong adding a reaction"})}
