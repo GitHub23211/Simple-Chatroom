@@ -3,7 +3,7 @@ import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
 import pic from '../components/placeholder_avatar.png'
 
-function Message ({msg, user, delMessage}) {
+function Message ({msg, user, delMessage, scrollDown}) {
     const [delButton, setDelButton] = useState(false)
     const [reactButton, setReactButton] = useState(false)
     const [showReactList, setReactList] = useState(false)
@@ -18,6 +18,8 @@ function Message ({msg, user, delMessage}) {
                 setReactList(false)
             })
     }
+
+    useEffect(scrollDown, [delButton, reactButton, showReactList])
 
     return(
         <div>

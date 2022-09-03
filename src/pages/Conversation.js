@@ -63,7 +63,7 @@ function Conversation({user}) {
                             <h5><strong>#{convoName}</strong></h5>
                         </div>
                         <div id="chat" style={style.messages} >
-                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage}/>)}
+                            {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} scrollDown={autoScrollDown}/>)}
                         </div>
 
                         <div style={style.input}>
