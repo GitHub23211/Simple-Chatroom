@@ -2,22 +2,23 @@ import { useEffect, useState } from "react"
 import {Link, useNavigate} from "react-router-dom"
 import {auth} from '../services'
 
-function newUser() {
-    return (
-        <div>
-            <input style={style.input} className="button button-primary" type="submit" value="Register"/>
-            <p>Already have an account? <Link to="/">Log in</Link></p> 
-        </div>
-    )
-}
-
-function oldUser() {
-    return (
-        <div>
-            <input style={style.input} className="button button-primary" type="submit" value="Log In"/>
-            <p>Need an account? <Link to="/register">Register</Link></p> 
-        </div>
-    )
+function ButtonText(toRegister, setFlag) {
+    if(toRegister) {
+        return (
+            <div>
+                <input style={style.input} className="button button-primary" type="submit" value="Register"/>
+                <p onClick={() => setFlag(false)}>Already have an account? <Link to="/">Log in</Link></p> 
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <input style={style.input} className="button button-primary" type="submit" value="Log In"/>
+                <p onClick={() => setFlag(false)}>Need an account? <Link to="/register">Register</Link></p> 
+            </div>
+        )
+    }
 }
 
 function invalidCredWarning() {
@@ -34,12 +35,6 @@ function Form ({toRegister, setUser}) {
     const [invalidCred, setFlag] = useState(false)
 
     const navigate = useNavigate()
-
-    const clearFields = () => {
-        setUsername("")
-        setPassword("")
-        setFlag(false)
-    }
 
     const createUserInfo = () => {
         if(username === "" || password === "") {
@@ -89,7 +84,6 @@ function Form ({toRegister, setUser}) {
     }
 
     const onSubmit = toRegister ? (event) => createSession(event, auth.registerUser) : (event) => createSession(event, auth.loginUser)
-    const buttonText = toRegister ? newUser() : oldUser()
     
     return (
         <form style={style.form} onSubmit={onSubmit}>
@@ -106,7 +100,7 @@ function Form ({toRegister, setUser}) {
                 <input style={style.input} className="u-full-width" id="password" type="password" onChange={event => updateInputField(event, setPassword)}/>
             </div>
 
-            {buttonText}
+            {ButtonText(toRegister, setFlag)}
         </form>
     )
 }

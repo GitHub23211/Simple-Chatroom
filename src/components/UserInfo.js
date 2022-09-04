@@ -46,7 +46,7 @@ const style = {
     },
 
     picContainer: {
-        flexGrow: 1,
+        flexGrow: 2,
     },
 
     pic: {
@@ -55,7 +55,10 @@ const style = {
     },
 
     profile: {
-        flexGrow: 1
+        flexGrow: 3,
+        overflow: "hidden",
+        maxWidth: "15vw",
+        textOverflow: "ellipsis"
     },
 
     logout: {
