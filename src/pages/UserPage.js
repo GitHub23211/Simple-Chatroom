@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import {userService} from '../services'
+import { userService } from '../services'
 
 function UserPage() {
     const [username, setUsername] = useState("")
@@ -43,14 +43,6 @@ const style = {
         marginTop: "3rem"
     },
 
-    textarea: {
-        resize: "none"
-    },
-
-    info: {
-        display: "flex",
-    },
-
     top: {
         display: "flex",
         flexWrap: "wrap",
@@ -72,11 +64,6 @@ const style = {
         maxWidth: "35vw"
     },
 
-    edit: {
-        textAlign: "center",
-        paddingBottom: "1rem"
-    },
-
     picContainer: {
         textAlign: "center"
     },
@@ -84,30 +71,7 @@ const style = {
     pic: {
         height: "90%",
         width: "20%"
-    },
-
-    bottom: {
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center"
-    },
-
-    avatar: {
-        flexGrow: 2,
-        display: "flex",
-        gap: "1rem"
-    },
-
-    avatarForm: {
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "1rem"
-    },
-
-    submit: {
-        flexGrow: 1,
-        marginBottom: "1rem"
-    },
+    }
 }
 
 export default UserPage

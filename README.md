@@ -7,6 +7,15 @@ Conversations are laid out similarly to Discord, with the senders name and avata
 
 Users can change their username, password, avatar and bio by clicking on their username in the nav bar. Avatars are generated thanks to Robohash.
 
+## Notes to the Markers
+Please use any of the following accounts to log in:
+* Username: bob, Password: 123
+* Username: mary, Password: 123
+* Username: connor, Password: 123
+
+or register your own to access the site. 
+Please note usernames are NOT case-sensitive so Bob, BOB, and bob are the same username.
+
 ## Frontend Extensions
 * Added support for querying a limited number of messages at once
 * Added a logout button that logs out user and redirects them to landing page.

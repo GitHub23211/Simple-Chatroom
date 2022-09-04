@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import {auth, profileService} from '../services'
 
-
 const editProfileForm = (editProfile, generateAvatar) => {
     return (
         <form onSubmit={editProfile}>

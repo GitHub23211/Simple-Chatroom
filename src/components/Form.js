@@ -42,7 +42,7 @@ function Form ({toRegister, setUser}) {
         }
         else {
             return {
-                username: username,
+                username: username.toLowerCase(),
                 password: password
             }
         }
