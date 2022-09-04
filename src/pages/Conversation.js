@@ -45,7 +45,6 @@ function Conversation({user}) {
         if(elem.scrollHeight - elem.scrollTop <= 480) {
             elem.scrollTop = elem.scrollHeight
         }
-        console.log(elem.scrollHeight - elem.scrollTop)
     }
 
     useEffect(getMessages, [currentConvo])
