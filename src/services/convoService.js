@@ -55,4 +55,22 @@ const addReaction = (convoId, msgId, reaction) => {
               .then(response => response.data)
 }
 
-export default { getConversations, createConversation, sendMessage, getMessages, getMessage, deleteMessage, addReaction, setToken }
+const getAUser = (msgid, userid) => {
+  return axios.get(`/api/${msgid}/${userid}`, createHeaders())
+              .then(response => response.data)
+}
+
+
+export default { 
+  
+  getConversations, 
+  createConversation, 
+  sendMessage, 
+  getMessages, 
+  getMessage, 
+  deleteMessage, 
+  addReaction, 
+  setToken,
+  getAUser
+
+ }

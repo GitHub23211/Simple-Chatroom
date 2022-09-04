@@ -21,7 +21,6 @@ const editProfileForm = (editProfile, generateAvatar) => {
 
             <div style={style.bottom}>
                 <div style={style.avatar}>
-                    <label htmlFor="avatar">Avatar</label>
                     <div style={style.avatarForm}>
                         <input type="text" id="avatar" placeholder="Type in a word!"/>
                         <button onClick={generateAvatar}>Generate Avatar</button>

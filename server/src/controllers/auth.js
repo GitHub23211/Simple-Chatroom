@@ -61,7 +61,7 @@ const getUser = async (request, response) => {
                         avatar: match.avatar
                     })       
                 }
-        } catch {response.json({stauts: "missing or invalid token"})}
+        } catch {response.json({status: "missing or invalid token"})}
 
     } 
     else {

@@ -41,6 +41,9 @@ router.put('/api/conversations/:id/:msgid', messages.addReaction)
 /* PUT to user profile to make changes to their information */
 router.put('/api/profile/:userid', profile.updateUser)
 
+/* GET the creator of a message and grab their avatar */
+router.get('/api/:msgid/:userid', conv.getAUser)
+
 
 
 module.exports = router 

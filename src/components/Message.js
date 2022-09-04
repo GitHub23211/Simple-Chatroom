@@ -9,7 +9,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
     const [userInfo, setUserInfo] = useState({})
 
     const getUserInfo = () => {
-        auth.getUser(user).then(response => {
+        convoService.getAUser(msg.id, msg.creator).then(response => {
             setUserInfo(response)
         })
     }
