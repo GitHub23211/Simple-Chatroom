@@ -6,12 +6,17 @@ function Message ({msg, user, delMessage, scrollDown}) {
     const [delButton, setDelButton] = useState(false)
     const [reactButton, setReactButton] = useState(false)
     const [showReactList, setReactList] = useState(false)
+    const [userList, setUserList] = useState({})
     const [userInfo, setUserInfo] = useState({})
 
     const getUserInfo = () => {
         convoService.getAUser(msg.id, msg.creator).then(response => {
-            setUserInfo(response)
+            setUserList(response)
             console.log(msg)
+        })
+
+        auth.getUser(user).then(response => {
+            setUserInfo(response)
         })
     }
 
@@ -39,7 +44,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
         <div>
             <div style={style.container}>
                 <div style={style.contents}>
-                    <img style={style.avatar} src={userInfo.avatar} alt="user_avatar"/>
+                    <img style={style.avatar} src={userList.avatar} alt="user_avatar"/>
                     <span style={style.creator}><strong>{msg.creator}</strong></span>
                 </div>
 
