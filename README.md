@@ -12,6 +12,8 @@ Conversations are laid out similarly to Discord, with the senders name and avata
 * Added persistent log ins so that user is not logged out if they refresh the page.
 * Added the ability for users to react to their own and other messages with an emoji chosen from a list of 15 emojis.
     * Emojis are rendered under the message a user reacts to.
+* Added the ability for uers to edit their username, passwords, bio, and avatar.
+    * Users cannot directly upload their own avatar but must submit a string which is then appended to https://robohash.org/ to generate a unique avatar for them.
 
 ## Backend Extensions
 * Modified Session schema so that it accepts passwords submitted by users.
@@ -21,3 +23,4 @@ Conversations are laid out similarly to Discord, with the senders name and avata
     * Created a secret phrase in the .env to store the validation token for JWT encryption/decryption.
 * Modified getMessages function in .../controllers/messagse.js to also return information about the current conversation room.
 * Modified Message schema to hold a "reaction" object that stores a String for the emoji and an Int to store the number of times that emoji has been selected.
+* Modified Session schema so that it now holds a bio field and avatar field.

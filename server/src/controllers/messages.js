@@ -93,7 +93,7 @@ const deleteMessage = async (request, response) => {
 
 /* 
  * addReaction - Creates a reaction object
- *   and updates the targetted message's reaction field in the database
+ *   and updates the targeted message's reaction field in the database
  *   return the sent emoji if successful, else send an error.
 */
 const addReaction = async (request, response) => {

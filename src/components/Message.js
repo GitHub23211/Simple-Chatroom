@@ -64,8 +64,8 @@ const style = {
     },
 
     avatar: {
-        maxHeight: "25px",
-        maxWidth: "25px",
+        maxHeight: "35px",
+        maxWidth: "35px",
     },
 
     creator: {

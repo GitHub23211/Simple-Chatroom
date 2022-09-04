@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import {auth, profileService} from '../services'
 
 
-const editProfileForm = (editProfile) => {
+const editProfileForm = (editProfile, generateAvatar) => {
     return (
         <form onSubmit={editProfile}>
             <div className="row">
@@ -22,10 +22,12 @@ const editProfileForm = (editProfile) => {
             <div style={style.bottom}>
                 <div style={style.avatar}>
                     <label htmlFor="avatar">Avatar</label>
-                    <input type="text" id="avatar" placeholder="Type in a word to get a unique avatar!"/>
-                    <button>Generate Avatar</button>
+                    <div style={style.avatarForm}>
+                        <input type="text" id="avatar" placeholder="Type in a word!"/>
+                        <button onClick={generateAvatar}>Generate Avatar</button>
+                    </div>
                 </div>
-                <input style={style.submit}className="button button-primary" type="submit"/>
+                <input style={style.submit} className="button button-primary" type="submit"/>
             </div>
         </form>
     )
@@ -42,18 +44,23 @@ const showUserInfo = (userInfo) => {
 
 function Profile({user}) {
     const [userInfo, setUserInfo] = useState({})
+    const [avatar, setAvatar] = useState("")
     const [editMode, setEditMode] = useState(false)
 
     const getUser = () => {
-        auth.getUser(user).then(response => setUserInfo(response))
+        auth.getUser(user).then(response => {setUserInfo(response); setAvatar(response.avatar)})
+    }
+
+    const generateAvatar = (event) => {
+        event.preventDefault()
+        setAvatar(`https://robohash.org/${event.target.previousSibling.value}`)
     }
 
     const editProfile = (event) => {
         event.preventDefault()
         const infoToUpdate = sanitiseInputs(event.target)
-        console.log(infoToUpdate)
         profileService.updateProfile(userInfo.id, infoToUpdate)
-                      .then(response => console.log(response))
+                      .then(response => setEditMode(false))
     }
 
     const sanitiseInputs = (target) => {
@@ -61,21 +68,21 @@ function Profile({user}) {
         for(let i = 0; i < 4; i++) {
             if(target[i].value != "" && target[i].value != null) {
                 InfoToUpdate[target[i].id] = target[i].value
-            }
-            if(i === 3) {
-                InfoToUpdate[target[i].id] = `https://robohash.org/${target[i].value}`
+                if(i === 3) {
+                    InfoToUpdate[target[i].id] = `https://robohash.org/${target[i].value}`
+                }
             }
         }
         return InfoToUpdate
     }
 
-    useEffect(getUser, [])
+    useEffect(getUser, [editMode])
 
     return(
         <div style={style.container} className="container">
 
                 <div style={style.picContainer}>
-                    <img style={style.pic} src={userInfo.avatar} alt="user profile picture"/>
+                    <img style={style.pic} src={avatar} alt="user avatar"/>
                 </div>
 
                 <div style={style.top}>
@@ -86,7 +93,7 @@ function Profile({user}) {
                     <button onClick={() => setEditMode(!editMode)}>Edit User Profile</button>
                 </div>
 
-                {editMode ? editProfileForm(editProfile) : showUserInfo(userInfo) }
+                {editMode ? editProfileForm(editProfile, generateAvatar) : showUserInfo(userInfo) }
         </div>
     )
 }
@@ -102,23 +109,6 @@ const style = {
 
     info: {
         display: "flex",
-    },
-
-    bottom: {
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center"
-    },
-
-    avatar: {
-        flexGrow: 2,
-        display: "flex",
-        gap: "1rem"
-    },
-
-    submit: {
-        flexGrow: 1,
-        marginTop: "1rem"
     },
 
     top: {
@@ -154,7 +144,30 @@ const style = {
     pic: {
         height: "90%",
         width: "20%"
-    }
+    },
+
+    bottom: {
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center"
+    },
+
+    avatar: {
+        flexGrow: 2,
+        display: "flex",
+        gap: "1rem"
+    },
+
+    avatarForm: {
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "1rem"
+    },
+
+    submit: {
+        flexGrow: 1,
+        marginBottom: "1rem"
+    },
 }
 
 export default Profile

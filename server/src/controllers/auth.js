@@ -5,6 +5,7 @@ const jwt = require(`jsonwebtoken`)
 
 const SECRET = process.env.SESSION_DB_SECRET
 
+/* Helper function to encode a token from user information */
 const encodeToken = (id, username) => {
     const userForToken = {
         id: id,
@@ -92,7 +93,7 @@ const validUser = async (request) => {
 
 /* 
  * loginUser - Checks if the username and password in the request
- *   parameter contains a valid user.
+ *   body contains a valid user.
  *   return the user's token if match, else send an error.
 */
 const loginUser = async (request, response) => {
