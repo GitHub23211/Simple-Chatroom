@@ -1,14 +1,15 @@
 import {useEffect, useState} from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import {auth} from '../services'
-import pic from './placeholder_avatar.png'
 
 function UserInfo({user, setUser}) {
-    const [username, setUsername] = useState("")
+    const [userInfo, setUserInfo] = useState({})
     const navigate = useNavigate()
 
-    const setName = () => {
-        auth.getUser(user).then(response => setUsername(response.username))
+    const getUserInfo = () => {
+        auth.getUser(user).then(response => {
+            setUserInfo(response)
+        })
     }
 
     const logoutUser = () => {
@@ -17,16 +18,16 @@ function UserInfo({user, setUser}) {
         navigate('/')
     }
 
-    useEffect(setName, [])
+    useEffect(getUserInfo, [])
 
     return(
         <div style={style.container}>
             <div style={style.picContainer}>
-                <img style={style.pic} src={pic} alt="user profile picture"/>
+                <img style={style.pic} src={userInfo.avatar} alt="user profile picture"/>
             </div>
 
             <div style={style.profile}>
-                <Link to="/profile">{username}</Link>
+                <Link to={`/profile/${userInfo.id}`}>{userInfo.username}</Link>
             </div>
 
             <div style={style.logout}>

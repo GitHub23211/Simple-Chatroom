@@ -2,7 +2,7 @@ import { ConversationList, UserInfo } from './components'
 import { Home, Conversation, Profile } from './pages'
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import { convoService } from './services'
+import { convoService, profileService } from './services'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -15,6 +15,7 @@ function App() {
   }
   
   convoService.setToken(user)
+  profileService.setToken(user)
 
   useEffect(checkForUser, [])
 
@@ -39,7 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home toRegister={false} user={user} setUser={setUser}/>}/>
           <Route path="/register" element={<Home toRegister={true} user={user} setUser={setUser}/>}/>
-          <Route path="/profile" element={<Profile user={user}/>}/>
+          <Route path="/profile/:userid" element={<Profile user={user}/>}/>
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation user={user}/>}/>
         </Routes>

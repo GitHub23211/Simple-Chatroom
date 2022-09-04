@@ -1,31 +1,35 @@
 import {useEffect, useState} from 'react'
 import {auth, convoService} from '../services'
 import ReactionList from './ReactionList'
-import pic from '../components/placeholder_avatar.png'
 
 function Message ({msg, user, delMessage, scrollDown}) {
     const [delButton, setDelButton] = useState(false)
     const [reactButton, setReactButton] = useState(false)
     const [showReactList, setReactList] = useState(false)
+    const [userInfo, setUserInfo] = useState({})
+
+    const getUserInfo = () => {
+        auth.getUser(user).then(response => {
+            setUserInfo(response)
+        })
+    }
 
     const showMessageOpts = () => {
-        auth.getUser(user)
-            .then(response => {
-                if(response.username === msg.creator) {
-                    setDelButton(!delButton)
-                }
-                setReactButton(!reactButton)
-                setReactList(false)
-            })
+        if(userInfo.username === msg.creator) {
+            setDelButton(!delButton)
+        }
+        setReactButton(!reactButton)
+        setReactList(false)
     }
 
     useEffect(scrollDown, [delButton, reactButton, showReactList])
+    useEffect(getUserInfo, [])
 
     return(
         <div>
             <div style={style.container}>
                 <div style={style.contents}>
-                    <img style={style.avatar} src={pic} alt="user profile picture"/>
+                    <img style={style.avatar} src={userInfo.avatar} alt="user_avatar"/>
                     <span style={style.creator}><strong>{msg.creator}</strong></span>
                 </div>
 

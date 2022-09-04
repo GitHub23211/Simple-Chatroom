@@ -3,7 +3,11 @@ import { convoService } from "../services"
 function Reaction({emoji, convoId, msgId, setReactList}) {
 
     const onReact = (event) => {
-        convoService.addReaction(convoId, msgId, event.target.innerHTML, 1)
+        const reaction = { 
+            "emoji": event.target.innerHTML,
+            "num": 1
+        }
+        convoService.addReaction(convoId, msgId, reaction)
                     .then(response => setReactList(false))
     }
     

@@ -50,12 +50,8 @@ const deleteMessage = (convoId, msgId) => {
               .then(response => response.data)
 }
 
-const addReaction = (convoId, msgId, reaction, num) => {
-  const react = { 
-      "emoji": reaction,
-      "num": num
-  }
-  return axios.put(url+`${convoId}/${msgId}`, react, createHeaders())
+const addReaction = (convoId, msgId, reaction) => {
+  return axios.put(url+`${convoId}/${msgId}`, reaction, createHeaders())
               .then(response => response.data)
 }
 

@@ -3,7 +3,8 @@ const config = require('../config')
 
 const sessionSchema = new mongoose.Schema({
     username: {type: String, unique: true},
-    password: {type: String, uniqie: false},
+    password: String,
+    bio: String,
     avatar: String
   })
 

@@ -24,7 +24,8 @@ const createSession = async (request, response) => {
     const session = new models.Session({
         username: request.body.username,
         password: password,
-        avatar: "dummy URL"
+        bio: "Hi, I'm " + request.body.username + "!",
+        avatar: `https://robohash.org/${request.body.username}`
     })
 
     const returned = await session.save()
@@ -55,6 +56,7 @@ const getUser = async (request, response) => {
                         status: "success",
                         id: match._id,
                         username: match.username,
+                        bio: match.bio,
                         avatar: match.avatar
                     })       
                 }

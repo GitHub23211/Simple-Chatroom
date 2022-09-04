@@ -2,7 +2,7 @@ const express = require('express')
 const auth = require('./controllers/auth')
 const conv = require('./controllers/conversations')
 const messages = require('./controllers/messages')
-const upload = require('./controllers/upload')
+const profile = require('./controllers/profile')
 
 const router = express.Router()
  
@@ -38,8 +38,8 @@ router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 /* PUT to message URL to add a reaction to the message */
 router.put('/api/conversations/:id/:msgid', messages.addReaction)
 
-/* PUT to user profile to upload a picture as their avatar */
-router.put('/api/:userid/avatar', upload.uploadAvatar)
+/* PUT to user profile to make changes to their information */
+router.put('/api/profile/:userid', profile.updateUser)
 
 
 

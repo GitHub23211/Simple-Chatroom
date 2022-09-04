@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import {auth} from '../services'
-import pic from '../components/placeholder_avatar.png'
+import {auth, profileService} from '../services'
 
 
-const editProfileForm = () => {
+const editProfileForm = (editProfile) => {
     return (
-        <form>
+        <form onSubmit={editProfile}>
             <div className="row">
                 <div className="six columns">
                     <label htmlFor="username">Username</label>
@@ -18,12 +17,13 @@ const editProfileForm = () => {
             </div>
 
             <label htmlFor="bio">Bio</label>
-            <textarea style={style.textarea} className="u-full-width" rows="30" cols="50"/>
+            <textarea style={style.textarea} id="bio" className="u-full-width" rows="30" cols="50"/>
 
             <div style={style.bottom}>
-                <div style={style.upload}>
-                    <label htmlFor="upload">Upload Avatar</label>
-                    <input className="button" type="file" id="upload"/>
+                <div style={style.avatar}>
+                    <label htmlFor="avatar">Avatar</label>
+                    <input type="text" id="avatar" placeholder="Type in a word to get a unique avatar!"/>
+                    <button>Generate Avatar</button>
                 </div>
                 <input style={style.submit}className="button button-primary" type="submit"/>
             </div>
@@ -31,8 +31,13 @@ const editProfileForm = () => {
     )
 }
 
-const showUserInfo = () => {
-
+const showUserInfo = (userInfo) => {
+    return (
+        <div>
+            <label htmlFor="bio">Bio</label>
+            <p>{userInfo.bio}</p>
+        </div>
+    )
 }
 
 function Profile({user}) {
@@ -43,21 +48,45 @@ function Profile({user}) {
         auth.getUser(user).then(response => setUserInfo(response))
     }
 
+    const editProfile = (event) => {
+        event.preventDefault()
+        const infoToUpdate = sanitiseInputs(event.target)
+        console.log(infoToUpdate)
+        profileService.updateProfile(userInfo.id, infoToUpdate)
+                      .then(response => console.log(response))
+    }
+
+    const sanitiseInputs = (target) => {
+        let InfoToUpdate = {}
+        for(let i = 0; i < 4; i++) {
+            if(target[i].value != "" && target[i].value != null) {
+                InfoToUpdate[target[i].id] = target[i].value
+            }
+            if(i === 3) {
+                InfoToUpdate[target[i].id] = `https://robohash.org/${target[i].value}`
+            }
+        }
+        return InfoToUpdate
+    }
+
     useEffect(getUser, [])
 
     return(
         <div style={style.container} className="container">
 
                 <div style={style.picContainer}>
-                    <img style={style.pic} src={pic} alt="user profile picture"/>
+                    <img style={style.pic} src={userInfo.avatar} alt="user profile picture"/>
                 </div>
 
                 <div style={style.top}>
                     <span style={style.nameContainer}><h1 style={style.name}>{userInfo.username}</h1></span>
-                    <button style={style.edit} onClick={() => setEditMode(!editMode)}>Edit User Profile</button>
                 </div>
 
-                {editMode ? editProfileForm() : showUserInfo() }
+                <div style={style.edit}>
+                    <button onClick={() => setEditMode(!editMode)}>Edit User Profile</button>
+                </div>
+
+                {editMode ? editProfileForm(editProfile) : showUserInfo(userInfo) }
         </div>
     )
 }
@@ -81,8 +110,10 @@ const style = {
         alignItems: "center"
     },
 
-    upload: {
-        flexGrow: 2
+    avatar: {
+        flexGrow: 2,
+        display: "flex",
+        gap: "1rem"
     },
 
     submit: {
@@ -92,12 +123,16 @@ const style = {
 
     top: {
         display: "flex",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        width: "50%",
+        marginRight: "25%",
+        marginLeft: "25%"
     },
 
     nameContainer: {
         flexGrow: 5,
-        marginLeft: "2rem"
+        marginLeft: "1rem",
+        textAlign: "center"
     },
 
     name: {
@@ -108,12 +143,12 @@ const style = {
     },
 
     edit: {
-        flexGrow: 1,
-        marginTop: "2rem"
+        textAlign: "center",
+        paddingBottom: "1rem"
     },
 
-
     picContainer: {
+        textAlign: "center"
     },
 
     pic: {
