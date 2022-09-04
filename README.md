@@ -16,6 +16,7 @@ Users can change their username, password, avatar and bio by clicking on their u
     * Emojis are rendered under the message a user reacts to.
 * Added the ability for uers to edit their username, passwords, bio, and avatar.
     * Users cannot directly upload their own avatar but must submit a string which is then appended to https://robohash.org/ to generate a unique avatar for them.
+* Other users' names in a conversation links to a profile page that shows their avatar, name and bio.
 
 ## Backend Extensions
 * Modified Session schema so that it accepts passwords submitted by users.
