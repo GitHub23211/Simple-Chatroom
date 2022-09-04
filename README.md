@@ -27,7 +27,7 @@ Please note usernames are NOT case-sensitive so Bob, BOB, and bob are the same u
     * Emojis are rendered under the message a user reacts to.
 * Added the ability for users to edit their username, passwords, bio, and avatar.
     * Users cannot directly upload their own avatar but must submit a string which is then appended to https://robohash.org/ to generate a unique avatar for them.
-* Other users' names in a conversation links to a profile page that shows their avatar, name and bio.
+* Other users' names in a conversation are links to their profile page that shows their avatar, name and bio.
 
 ## Backend Extensions
 * Modified Session schema so that it accepts passwords submitted by users.
@@ -36,5 +36,5 @@ Please note usernames are NOT case-sensitive so Bob, BOB, and bob are the same u
 * Updated Authorization process to use JWTs instead of the userID.
     * Created a secret phrase in the .env to store the validation token for JWT encryption/decryption.
 * Modified getMessages function in .../controllers/messagse.js to also return information about the current conversation room.
-* Modified Message schema to hold a "reaction" object that stores a String for the emoji and an Int to store the number of times that emoji has been selected.
+* Modified Message schema to hold a "reaction" array that stores an array of reaction objects. Each object has a String for the emoji and an Int to store the number of times that emoji has been reacted with.
 * Modified Session schema so that it now holds a bio field and avatar field.
