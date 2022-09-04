@@ -9,5 +9,10 @@ const getAUser = (userid) => {
                 .then(response => response.data)
 }
 
+const displayUser = (userid) => {
+    return axios.get(url+`profile/${userid}`, tokenService.createHeaders())
+                .then(response => response.data)
+}
 
-export default { getAUser }
+
+export default { getAUser, displayUser }

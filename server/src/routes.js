@@ -3,6 +3,7 @@ const auth = require('./controllers/auth')
 const conv = require('./controllers/conversations')
 const messages = require('./controllers/messages')
 const profile = require('./controllers/profile')
+const users = require('./controllers/users')
 
 const router = express.Router()
  
@@ -39,10 +40,13 @@ router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 router.put('/api/conversations/:id/:msgid', messages.addReaction)
 
 /* PUT to user profile to make changes to their information */
-router.put('/api/profile/:userid', profile.updateUser)
+router.put('/api/profile/:userid', profile.updateProfile)
+
+/* GET a user profile to display */
+router.get('/api/users/profile/:userid', users.displayUser)
 
 /* GET the creator of a message and grab their avatar */
-router.get('/api/users/:userid', conv.getAUser)
+router.get('/api/users/:userid', users.getAUser)
 
 
 

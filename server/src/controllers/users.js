@@ -25,6 +25,31 @@ const getAUser = async (request, response) => {
     }
 }
 
+const displayUser = async (request, response) => {
+    const user = await auth.validUser(request)
+
+    if(user) {
+        try {
+            const userid = request.params.userid
+            const match = await models.Session.find({username: userid})
+
+            response.json({
+                status: "OK",
+                username: match[0].username,
+                bio: match[0].bio,
+                avatar: match[0].avatar
+            })
+        }
+        catch {response.json({status: "something went wrong", info: request.body})}
+
+    }
+    else {
+        response.json({status: "failed to find user"})
+    }
+
+}
+
 module.exports = { 
-    getAUser
+    getAUser,
+    displayUser
 }

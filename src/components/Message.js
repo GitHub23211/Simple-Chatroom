@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {auth, userService} from '../services'
+import {Link} from "react-router-dom"
 import ReactionList from './ReactionList'
 
 function Message ({msg, user, delMessage, scrollDown}) {
@@ -36,6 +37,19 @@ function Message ({msg, user, delMessage, scrollDown}) {
         )
     }
 
+    const attachLink = () => {
+        if(userInfo.username === msg.creator) {
+            return (
+                <span style={style.creator}><strong>{msg.creator}</strong></span>
+            )
+        }
+        else {
+            return (
+                <span style={style.creator}><strong><Link style={style.creatorLink} to={`/users/profile/${msg.creator}`}>{msg.creator}</Link></strong></span>
+            )
+        }
+    }
+
     useEffect(scrollDown, [delButton, reactButton, showReactList])
     useEffect(getUserInfo, [])
 
@@ -44,7 +58,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
             <div style={style.container}>
                 <div style={style.contents}>
                     <img style={style.avatar} src={userList.avatar} alt="user_avatar"/>
-                    <span style={style.creator}><strong>{msg.creator}</strong></span>
+                    {attachLink()}
                 </div>
 
                 <li style={style.message} data-id={msg.id} onClick={showMessageOpts}>
@@ -85,6 +99,10 @@ const style = {
     creator: {
         marginTop: "1rem",
         textAlign: "center"
+    },
+
+    creatorLink: {
+        color: "black"
     },
 
     message: {

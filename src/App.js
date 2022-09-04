@@ -1,5 +1,5 @@
 import { ConversationList, UserInfo } from './components'
-import { Home, Conversation, Profile } from './pages'
+import { Home, Conversation, Profile, UserPage } from './pages'
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import { tokenService } from './services'
@@ -11,6 +11,7 @@ function App() {
     const user = localStorage.getItem('user')
     if(user) {
       setUser(user)
+      console.log(user)
     }
   }
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<Home toRegister={false} user={user} setUser={setUser}/>}/>
           <Route path="/register" element={<Home toRegister={true} user={user} setUser={setUser}/>}/>
           <Route path="/profile/:userid" element={<Profile user={user}/>}/>
+          <Route path="/users/profile/:userid" element={<UserPage />}/>
           <Route path="/conversations" element={<ConversationList currentUser={user}/>}/>
           <Route path="/conversations/:convoId" element={<Conversation user={user}/>}/>
         </Routes>

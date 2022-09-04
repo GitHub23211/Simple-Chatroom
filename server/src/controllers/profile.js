@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
  *   before sending to the database
  *   Returns the information sent on success otherwise returns an error message
 */
-const updateUser = async (request, response) => {
+const updateProfile = async (request, response) => {
     const user = await auth.validUser(request)
 
     if(user) {
@@ -29,4 +29,6 @@ const updateUser = async (request, response) => {
     }
 }
 
-module.exports = { updateUser }
+
+
+module.exports = { updateProfile }
