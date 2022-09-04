@@ -42,13 +42,10 @@ function Conversation({user}) {
 
     const autoScrollDown = () => {
         const elem = document.getElementById("chat")
-        if(elem.scrollHeight - elem.scrollTop <= 480) {
-            elem.scrollTop = elem.scrollHeight
-        }
+        elem.scrollTop = elem.scrollHeight
     }
 
     useEffect(getMessages, [currentConvo])
-    useEffect(autoScrollDown, [myMsgs])
     useEffect(() => {
         const interval = setInterval(() => {
             getMessages()
@@ -69,7 +66,7 @@ function Conversation({user}) {
                         <h5><strong>#{convoName}</strong></h5>
                     </div>
                     <div id="chat" style={style.messages} >
-                        {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} scrollDown={autoScrollDown}/>)}
+                        {myMsgs.map(msg => <Message key={msg.id} msg={msg} user={user} delMessage={deleteMessage} scrollDown={(autoScrollDown)}/>)}
                     </div>
 
                     <div style={style.input}>
