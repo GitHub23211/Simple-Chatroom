@@ -8,7 +8,6 @@ function Reaction({emoji, convoId, msgId, setReactList}) {
             convoService.addReaction(convoId, msgId, newReaction)
                         .then(response => setReactList(false))
         })
-
     }
 
     const createReaction = (reaction, event) => {
@@ -21,13 +20,11 @@ function Reaction({emoji, convoId, msgId, setReactList}) {
                     "op": "update"
                 }
             }
-            else {
-                return {
-                    "emoji": event.target.innerHTML,
-                    "num": 1,
-                    "op": "push"
-                }
-            }
+        }
+        return {
+            "emoji": event.target.innerHTML,
+            "num": 1,
+            "op": "push"
         }
     }
     
