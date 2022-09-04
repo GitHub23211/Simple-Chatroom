@@ -4,14 +4,14 @@ function Reaction({emoji, convoId, msgId, setReactList}) {
 
     const onReact = (event) => {
         convoService.getMessage(convoId, msgId).then(response => {
-            const newReaction = createReaction(response.reaction)
+            const newReaction = createReaction(response.reaction, event)
             convoService.addReaction(convoId, msgId, newReaction)
                         .then(response => setReactList(false))
         })
 
     }
 
-    const createReaction = (reaction) => {
+    const createReaction = (reaction, event) => {
         for(let i = 0; i < reaction.length; i++) {
             console.log(reaction[i].emoji, event.target.innerHTML,reaction[i].emoji === event.target.innerHTML)
             if(reaction[i].emoji === event.target.innerHTML) {
