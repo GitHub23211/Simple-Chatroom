@@ -19,7 +19,6 @@ or register your own to access the site.
 Please note usernames are NOT case-sensitive so Bob, BOB, and bob are the same username.
 
 ## Frontend Extensions
-* Added support for querying a limited number of messages at once
 * Added a logout button that logs out user and redirects them to the landing page.
 * Logging in or successfully registering now redirects the user to the Conversations list.
 * Added persistent log ins so that users are not logged out if they refresh the page.
@@ -30,6 +29,7 @@ Please note usernames are NOT case-sensitive so Bob, BOB, and bob are the same u
 * Other users' names in a conversation are links to their profile page that shows their avatar, name and bio.
 
 ## Backend Extensions
+* Added support for querying a limited number of messages at once
 * Modified Session schema so that it accepts passwords submitted by users.
     * Passwords are hashed with bcrypt before being sent to the database.
     * Added a new loginUser function in ./server/src/controllers/auth.js to make use of these passwords when verifying users.

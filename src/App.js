@@ -11,7 +11,6 @@ function App() {
     const user = localStorage.getItem('user')
     if(user) {
       setUser(user)
-      console.log(user)
     }
   }
 
