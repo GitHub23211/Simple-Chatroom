@@ -1,65 +1,46 @@
 import axios from 'axios'
+import tokenService from './tokenService'
 
 const url = '/api/conversations/'
 
-let token = null
-
-const setToken = (user) => {
-  token = user
-}
-
-const createHeaders = () => {
-  return {
-    headers: {
-      "Authorization": "bearer " + token
-    }
-  }
-}
-
 const createConversation = (title) => {
-  return axios.post(url, title, createHeaders())
+  return axios.post(url, title, tokenService.createHeaders())
               .then(response => response.data)
 }
 
 const getConversations = () => {
-    return axios.get(url, createHeaders())
+    return axios.get(url, tokenService.createHeaders())
                 .then(response => response.data.conversations)
 }
 
 const getMessages = (num, id) => {
-  const headers = createHeaders()
+  const headers = tokenService.createHeaders()
   headers["params"] = {
     "num": num
   }
-  return axios.get(url+id, createHeaders())
+  return axios.get(url+id, tokenService.createHeaders())
               .then(response => response.data)
 }
 
 const getMessage = (convoId, msgId) => {
-  return axios.get(url+`${convoId}/${msgId}`, createHeaders())
+  return axios.get(url+`${convoId}/${msgId}`, tokenService.createHeaders())
               .then(response => response.data)
 }
 
 const sendMessage = (message, id) => {
-    return axios.post(url+id, message, createHeaders())
+    return axios.post(url+id, message, tokenService.createHeaders())
                 .then(response => response.data)
 }
 
 const deleteMessage = (convoId, msgId) => {
-  return axios.delete(url+`${convoId}/${msgId}`, createHeaders())
+  return axios.delete(url+`${convoId}/${msgId}`, tokenService.createHeaders())
               .then(response => response.data)
 }
 
 const addReaction = (convoId, msgId, reaction) => {
-  return axios.put(url+`${convoId}/${msgId}`, reaction, createHeaders())
+  return axios.put(url+`${convoId}/${msgId}`, reaction, tokenService.createHeaders())
               .then(response => response.data)
 }
-
-const getAUser = (msgid, userid) => {
-  return axios.get(`/api/${msgid}/${userid}`, createHeaders())
-              .then(response => response.data)
-}
-
 
 export default { 
   
@@ -70,7 +51,5 @@ export default {
   getMessage, 
   deleteMessage, 
   addReaction, 
-  setToken,
-  getAUser
 
  }

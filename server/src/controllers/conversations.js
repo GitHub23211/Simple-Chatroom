@@ -36,6 +36,9 @@ const getConversations = async (request, response) => {
 
 }
 
+/* 
+ * getAUser - Finds a user based on their username and returns their username and avatar url.
+*/
 const getAUser = async (request, response) => {
 
     const user = await auth.validUser(request)

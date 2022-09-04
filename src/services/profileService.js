@@ -1,24 +1,11 @@
 import axios from 'axios'
+import tokenService from './tokenService'
 
 const url = '/api/profile/'
 
-let token = null
-
-const setToken = (user) => {
-  token = user
-}
-
-const createHeaders = () => {
-  return {
-    headers: {
-      "Authorization": "bearer " + token
-    }
-  }
-}
-
 const updateProfile = (userid, info) => {
-    return axios.put(url+userid, info, createHeaders())
+    return axios.put(url+userid, info, tokenService.createHeaders())
                 .then(response => response.data)
 }
 
-export default {setToken, updateProfile}
+export default { updateProfile}

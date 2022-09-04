@@ -42,7 +42,7 @@ router.put('/api/conversations/:id/:msgid', messages.addReaction)
 router.put('/api/profile/:userid', profile.updateUser)
 
 /* GET the creator of a message and grab their avatar */
-router.get('/api/:msgid/:userid', conv.getAUser)
+router.get('/api/users/:userid', conv.getAUser)
 
 
 

@@ -3,7 +3,7 @@
 ## Application Description
 A simple chatroom application that mimicks other widely used applications such as Discord and Messenger. Users simply sign up with a username and password. After successfully registering or signing in, users are shown links to available Conversations and their profiles as well as a logout button.
 
-Conversations are laid out similarly to Discord, with the senders name and avatar shown above their message. Users can click on messages they have sent to show buttons to delete the message or react to the message. Clicking on messages sent by others only shows the react button. Clicking on the react button brings up a list of 15 emojis that a user can click on to attach to that message.
+Conversations are laid out similarly to Discord, with the senders name and avatar shown above their message. Users can create their own conversations or click on existing ones.Once in a conversation, Users can click on messages they have sent to show buttons to delete the message or react to the message. Clicking on messages sent by others only shows the react button. Clicking on the react button brings up a list of 15 emojis that a user can click on to attach to that message.
 
 Users can change their username, password, avatar and bio by clicking on their username in the nav bar. Avatars are generated thanks to Robohash.
 

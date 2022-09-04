@@ -24,9 +24,6 @@ function Reaction({emoji, convoId, msgId, setReactList}) {
                     }
                 }
             }
-
-            console.log(reaction)
-            console.log(newReaction)
             convoService.addReaction(convoId, msgId, newReaction)
                         .then(response => setReactList(false))
         })

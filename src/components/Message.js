@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {auth, convoService} from '../services'
+import {auth, userService} from '../services'
 import ReactionList from './ReactionList'
 
 function Message ({msg, user, delMessage, scrollDown}) {
@@ -10,9 +10,8 @@ function Message ({msg, user, delMessage, scrollDown}) {
     const [userInfo, setUserInfo] = useState({})
 
     const getUserInfo = () => {
-        convoService.getAUser(msg.id, msg.creator).then(response => {
+        userService.getAUser(msg.creator).then(response => {
             setUserList(response)
-            console.log(msg)
         })
 
         auth.getUser(user).then(response => {
@@ -32,7 +31,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
         const filteredArr = msg.reaction.filter((emoji) => emoji.num != 0)
         return (
             <>
-                {filteredArr.map(reaction => <>{reaction.emoji} {reaction.num}</>)}
+                {filteredArr.map(reaction => <span key={filteredArr.indexOf(reaction)}>{reaction.emoji} {reaction.num}</span>)}
             </>
         )
     }

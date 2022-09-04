@@ -2,7 +2,7 @@ import { ConversationList, UserInfo } from './components'
 import { Home, Conversation, Profile } from './pages'
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import { convoService, profileService } from './services'
+import { tokenService } from './services'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -11,12 +11,10 @@ function App() {
     const user = localStorage.getItem('user')
     if(user) {
       setUser(user)
-      console.log(user)
     }
   }
-  
-  convoService.setToken(user)
-  profileService.setToken(user)
+
+  tokenService.setToken(user)
 
   useEffect(checkForUser, [])
 
