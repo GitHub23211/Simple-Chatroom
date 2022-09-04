@@ -12,7 +12,6 @@ function Reaction({emoji, convoId, msgId, setReactList}) {
 
     const createReaction = (reaction, event) => {
         for(let i = 0; i < reaction.length; i++) {
-            console.log(reaction[i].emoji, event.target.innerHTML,reaction[i].emoji === event.target.innerHTML)
             if(reaction[i].emoji === event.target.innerHTML) {
                 return {
                     ...reaction[i],
