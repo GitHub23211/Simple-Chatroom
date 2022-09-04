@@ -11,6 +11,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
     const getUserInfo = () => {
         convoService.getAUser(msg.id, msg.creator).then(response => {
             setUserInfo(response)
+            console.log(msg)
         })
     }
 
@@ -20,6 +21,15 @@ function Message ({msg, user, delMessage, scrollDown}) {
         }
         setReactButton(!reactButton)
         setReactList(false)
+    }
+
+    const renderReactions = () => {
+        const filteredArr = msg.reaction.filter((emoji) => emoji.num != 0)
+        return (
+            <>
+                {filteredArr.map(reaction => <>{reaction.emoji} {reaction.num}</>)}
+            </>
+        )
     }
 
     useEffect(scrollDown, [delButton, reactButton, showReactList])
@@ -38,7 +48,7 @@ function Message ({msg, user, delMessage, scrollDown}) {
                 </li>
 
                 <div style={style.reaction}>
-                    {msg.reaction.emoji}
+                    {renderReactions()}
                 </div>
             </div>
  

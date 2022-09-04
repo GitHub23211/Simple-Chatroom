@@ -103,11 +103,17 @@ const addReaction = async (request, response) => {
     if (user) {
         try{
         const msgid = request.params.msgid
+        const operation = request.body.op
         const reaction = {
             "emoji": request.body.emoji,
             "num": request.body.num
         }
-        await models.Message.findByIdAndUpdate(msgid, {reaction: reaction})
+        if(operation === "push") {
+            await models.Message.updateOne({_id: msgid}, {$push: {reaction: reaction}})
+        }
+        else {
+            await models.Message.updateOne({_id: msgid, "reaction.emoji": request.body.emoji}, {$set: {"reaction.$": reaction}})
+        }
         response.json({status: "success", emoji: request.body.emoji})
     } 
     catch {request.json({status: "failed something went wrong adding a reaction"})}

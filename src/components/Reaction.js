@@ -3,12 +3,34 @@ import { convoService } from "../services"
 function Reaction({emoji, convoId, msgId, setReactList}) {
 
     const onReact = (event) => {
-        const reaction = { 
-            "emoji": event.target.innerHTML,
-            "num": 1
-        }
-        convoService.addReaction(convoId, msgId, reaction)
-                    .then(response => setReactList(false))
+        convoService.getMessage(convoId, msgId).then(response => {
+
+            const reaction = response.reaction
+            let newReaction = {}
+
+            for(let i = 0; i < reaction.length; i++) {
+                if(reaction[i].emoji === event.target.innerHTML) {
+                    newReaction = {
+                        ...reaction[i],
+                        "num": reaction[i].num + 1,
+                        "op": "update"
+                    }
+                }
+                else {
+                    newReaction = {
+                        "emoji": event.target.innerHTML,
+                        "num": 1,
+                        "op": "push"
+                    }
+                }
+            }
+
+            console.log(reaction)
+            console.log(newReaction)
+            convoService.addReaction(convoId, msgId, newReaction)
+                        .then(response => setReactList(false))
+        })
+
     }
     
     return (
