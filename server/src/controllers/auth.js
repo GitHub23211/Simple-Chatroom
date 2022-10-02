@@ -86,7 +86,7 @@ const validUser = async (request) => {
                 return match._id
             }
         }
-        catch {response.json({status: "missing or invalid token"})}
+        catch {return false}
     }
     return false
 }
